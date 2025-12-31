@@ -93,7 +93,7 @@ class admincontroller extends Controller
         $cuscount=customers::count();
         $onl=User::where('Status','Online')->get();
         $lds=leads::all();
-        $leadfeed=leadfeedback::all();
+        $leadfeed=leads::with('feedbacks')->get();
         return view('admin/admin-lead',compact('onl','escount','cuscount','lds','leadfeed'));
     }
 }
