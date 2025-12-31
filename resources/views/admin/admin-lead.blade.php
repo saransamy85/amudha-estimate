@@ -1,70 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.adminbase')
 
-<head>
-    <meta charset="UTF-8">
-    <title>@yield('title','Sales-Dashboard')</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('title','Dashboard')
 
-    <!-- Bootstrap 5 CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+@section('content')
+<div class="row md-4 g-3">
+    <div class="col-md-4">
+        <h4>Active users</h4>
+        <ul>
+            @foreach($onl as $online)
+            <li>{{$online->name}}</li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+<div class="row mt-4 g-3">
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h4 class="text-uppercase">estimates</h4>
+            {{$escount}}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h4 class="text-uppercase">Leads</h4>
+            0
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h4 class="text-uppercase">Customers</h4>
+             {{$cuscount}}
+        </div>
+    </div>
+</div>
+<br>
 
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- ApexCharts -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
-    <link rel="stylesheet" href="{{asset('css/admin.css')}}">
-
-
-</head>
-
-<body>
-
-    <div class="app-layout">
-
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <div class="sidebar-brand">
-                Amudha Decors
-            </div>
-
-            <nav class="sidebar-menu">
-                <a href="{{ route('salesdashboard') }}">
-                    <i class="bi bi-speedometer2"></i> Dashboard
-                </a>
-
-                <a href="#" class="active">
-                    <i class="bi bi-file-earmark-text"></i> Leads
-                </a>
-                <a href="{{route('customers')}}">
-                    <i class="bi bi-people"></i> Customers
-                </a>
-
-                <a href="{{route('logout')}}">
-                    <i class="bi bi-gear"></i> Log Out
-                </a>
-            </nav>
-        </aside>
-
-
-        <!-- MAIN CONTENT -->
-        <div class="main-content">
-
-            <!-- TOP NAVBAR -->
-            <nav class="topbar">
-                <h5 class="mb-0">@yield('title')</h5>
-
-                <div class="topbar-right">
-                    <i class="bi bi-bell"></i>
-                    {{session('username')}}
-                </div>
-            </nav>
-
-            <!-- PAGE CONTENT -->
-            <div class="page-content">
-                <div class="container-fluid">
+<div class="container-fluid">
                     <div class="row mt-4 g-3">
                         <div class="col-md-6">
                             <div class="card md-4 p-3">
@@ -275,13 +246,6 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    @stack('scripts')
+@endsection
 
-</body>
-
-</html>

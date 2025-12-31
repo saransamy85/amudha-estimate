@@ -8,7 +8,7 @@
             <i class="bi bi-speedometer2"></i> Dashboard
         </a>
 
-        <a href="#">
+        <a href="{{route('adminlead')}}">
             <i class="bi bi-file-earmark-text"></i> Leads
         </a>
 

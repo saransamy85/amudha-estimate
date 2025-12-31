@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\estimate;
 use App\Models\estimateitems;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\leads;
+use App\Models\leadfeedback;
 use DB;
 
 class admincontroller extends Controller
@@ -83,5 +85,15 @@ class admincontroller extends Controller
             session()->regenerateToken();
             
         return redirect()->route('login');
+    }
+
+    public function adminlead()
+    {
+        $escount=estimate::count();
+        $cuscount=customers::count();
+        $onl=User::where('Status','Online')->get();
+        $lds=leads::all();
+        $leadfeed=leadfeedback::all();
+        return view('admin/admin-lead',compact('onl','escount','cuscount','lds','leadfeed'));
     }
 }
