@@ -96,4 +96,9 @@ class admincontroller extends Controller
         $leadfeed=leads::with('feedbacks')->get();
         return view('admin/admin-lead',compact('onl','escount','cuscount','lds','leadfeed'));
     }
+    public function admincus()
+    {
+         $cli=customers::all();   
+        return view('admin/customer',compact('cli'));
+    }
 }

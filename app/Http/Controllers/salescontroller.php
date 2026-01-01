@@ -25,7 +25,7 @@ class salescontroller extends Controller
     }
     public function salescus()
     {
-         $cli=customers::all();
+        $cli=customers::all();
         return view('Sales/salescustomer',compact('cli'));
     }
     public function leaddash()
@@ -53,10 +53,17 @@ class salescontroller extends Controller
     }
     public function addfeedback(Request $request)
     {
-        $lfeed=leadfeedback::create([
-            'lead_id'=>$request->lead_id,
-            'feedback'=>$request->feedback,
-        ]);
+
+      $request->validate([
+        'lead_id' => 'required|exists:leads,id',
+        'feedback' => 'required|string',
+    ]);
+
+    $lead = leads::findOrFail($request->lead_id);
+
+    $lead->feedbacks()->create([
+        'feedback' => $request->feedback,
+    ]);
         return redirect()->route('leaddash');
     }
     

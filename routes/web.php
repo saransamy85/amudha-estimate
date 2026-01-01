@@ -43,5 +43,6 @@ Route::get('estimates/{id}/pdf', [estimatecontroller::class, 'pdf'])
 Route::resource('estimates', estimatecontroller::class);
 
 Route::get('/admin-lead',[admincontroller::class,'adminlead'])->name('adminlead');
+Route::get('/admin-customer',[admincontroller::class,'admincus'])->name('admincustomer');
 
 

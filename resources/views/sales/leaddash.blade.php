@@ -171,15 +171,17 @@
                                             <td>{{$leds->Status}}</td>
                                             <td>
                                                 <button class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#feedbackModal">
+                                                    data-bs-target="#feedbackModal" data-lead-id="{{ $leds->id }}">
                                                     Feedback
                                                 </button>
                                                 <div class="modal fade" id="feedbackModal" tabindex="-1">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
 
-                                                            <form method="POST" action="{{route('addfeedback')}}">
+                                                            <form method="POST" action="{{ route('addfeedback') }}">
                                                                 @csrf
+
+                                                                <input type="hidden" name="lead_id" id="lead_id">
 
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title">Add Feedback</h5>
@@ -188,9 +190,6 @@
                                                                 </div>
 
                                                                 <div class="modal-body">
-                                                                    <input type="hidden" name="lead_id"
-                                                                        value="{{ $leds->id }}">
-
                                                                     <div class="mb-3">
                                                                         <label>Feedback</label>
                                                                         <textarea name="feedback" class="form-control"
@@ -199,9 +198,8 @@
                                                                 </div>
 
                                                                 <div class="modal-footer">
-                                                                    <button type="submit" class="btn btn-success">
-                                                                        Save Feedback
-                                                                    </button>
+                                                                    <button type="submit" class="btn btn-success">Save
+                                                                        Feedback</button>
                                                                     <button type="button" class="btn btn-secondary"
                                                                         data-bs-dismiss="modal">
                                                                         Cancel
@@ -213,7 +211,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </td>
                                         </tr>
                                         @endforeach
@@ -279,6 +276,16 @@
         </div>
     </div>
 
+    <script>
+    document.getElementById('feedbackModal')
+        .addEventListener('show.bs.modal', function(event) {
+
+            let button = event.relatedTarget;
+            let leadId = button.getAttribute('data-lead-id');
+
+            document.getElementById('lead_id').value = leadId;
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     @stack('scripts')
 

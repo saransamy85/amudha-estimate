@@ -16,7 +16,7 @@
             <i class="bi bi-box-seam"></i> Inventory
         </a>
 
-        <a href="{{route('customers')}}">
+        <a href="{{route('admincustomer')}}">
             <i class="bi bi-people"></i> Customers
         </a>
 
