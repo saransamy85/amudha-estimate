@@ -89,8 +89,9 @@ Mobile: {{ $estimate->mobile }}
 @foreach($estimate->items as $item)
 <tr class="text-center">
 <td>{{ $item->location }}</td>
-<td>{{ $item->area }}</td>
-<td class="text-right">{{ number_format($item->rate,2) }}</td>
+<td>{{ rtrim(rtrim(number_format($item->area, 2), '0'), '.') }} Sq.ft</td>
+<!-- <td>{{ $item->area }} Sq.ft</td> -->
+<td class="text-right">{{ number_format($item->rate,2) }} /- (Per Sq.ft)</td>
 <td class="text-right">{{ number_format($item->value,2) }}</td>
 </tr>
 @endforeach
@@ -139,6 +140,27 @@ CUSTOMER<br>
 SEAL & SIGNATURE
 </td>
 </tr>
+</table>
+<br>
+<table class="no-border mt-20">
+    <tr>
+        <td><b>RTGS DETAILS</b></td>
+    </tr>
+    <tr>
+        <td>NAME: AMUDHA DECORS</td>
+    </tr>
+    <tr>
+        <td>A/C NO: 610 930 7000 1293</td>
+    </tr>
+    <tr>
+        <td>BANK: CANARA BANK</td>
+    </tr>
+    <tr>
+        <td>BRANCH: PORUR</td>
+    </tr>    
+        <tr>
+            <td>IFSC CODE: CNRB0002950</td>
+        </tr>
 </table>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

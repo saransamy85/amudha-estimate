@@ -23,7 +23,7 @@
     <div class="col-md-4">
         <div class="card p-3">
             <h4 class="text-uppercase">Leads</h4>
-            0
+            {{$lc}}
         </div>
     </div>
     <div class="col-md-4">
@@ -37,7 +37,7 @@
 
 <div class="container-fluid">
     <div class="row mt-4 g-3">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card md-4 p-3">
                 <form method="POST" action="{{route('addlead')}}">
                     @csrf
@@ -102,9 +102,9 @@
                         <select name="Status" class="form-control">
                             <option value="Details shared">Details shared</option>
                             <option value="Follow up">Follow up</option>
-                            <option value="site photo">Waiting for site photo</option>
-                            <option value="Quotation shared">Quotation shared</option>
                             <option value="Confirmed">Confirmed</option>
+                            <option value="Quote Shared">Quote Shared</option>
+                            <option value="RNR">RNR</option>
                             <option value="Cancelled">Cancelled</option>
                         </select>
                     </div>
@@ -113,7 +113,7 @@
                 </form>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card md-4 p-3">
                 <table class="table table-responsive">
                     <thead>
@@ -164,6 +164,19 @@
                                                         <label>Feedback</label>
                                                         <textarea name="feedback" class="form-control"
                                                             required></textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label>Status</label>
+                                                        <select class="form-select" aria-label="Default select example"
+                                                            name="status">
+                                                            <option value="Details shared">Details
+                                                                shared</option>
+                                                            <option value="Follow up">Follow up</option>
+                                                            <option value="Confirmed">Confirmed</option>
+                                                            <option value="Quote Shared">Quote Shared</option>
+                                                            <option value="RNR">RNR</option>
+                                                            <option value="Cancelled">Cancelled</option>
+                                                        </select>
                                                     </div>
                                                 </div>
 

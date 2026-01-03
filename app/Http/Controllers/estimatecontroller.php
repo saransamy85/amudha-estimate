@@ -72,10 +72,13 @@ class estimatecontroller extends Controller
 
     public function show($id)
     {
-        $estimate = estimate::with('items')->findOrFail($id);
-        $amountWords = rupees_in_words($estimate->net_total);
-
-        return view('estimates.show', compact('estimate', 'amountWords'));
+        if(session()->has('username'))
+        {
+            $estimate = estimate::with('items')->findOrFail($id);
+            $amountWords = rupees_in_words($estimate->net_total);
+            return view('estimates.show', compact('estimate', 'amountWords'));
+        }
+        return redirect()->route('login')->with('error',"You must Login");
     }
 
     public function edit($id)

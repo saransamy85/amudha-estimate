@@ -23,7 +23,7 @@
     <div class="col-md-4">
         <div class="card p-3">
             <h4 class="text-uppercase">Leads</h4>
-            0
+            {{$lc}}
         </div>
     </div>
     <div class="col-md-4">

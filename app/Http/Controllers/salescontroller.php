@@ -19,9 +19,10 @@ class salescontroller extends Controller
     {
         $estimates = estimate::latest()->get();
         $escount=estimate::count();
-       
+        $todayCount = estimate::whereDate('created_at', today())->count();
+        $monthlyCount = leads::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->count();
         
-        return view('Sales/salesdashboard',compact('estimates'));
+        return view('Sales/salesdashboard',compact('estimates','todayCount','monthlyCount'));
     }
     public function salescus()
     {
@@ -32,7 +33,8 @@ class salescontroller extends Controller
     {
         $lds=leads::all();
         $leadfeed=leadfeedback::all();
-        return view('Sales/leaddash',compact('lds','leadfeed'));
+        $leadSC = leads::select('Status', \DB::raw('count(*) as total'))->groupBy('Status')->pluck('total', 'Status');
+        return view('Sales/leaddash',compact('lds','leadfeed','leadSC'));
     }
     public function addlead(Request $request)
     {
@@ -60,11 +62,17 @@ class salescontroller extends Controller
     ]);
 
     $lead = leads::findOrFail($request->lead_id);
-
+    $lead->update([
+        'Status'=>$request->status,
+    ]);
     $lead->feedbacks()->create([
         'feedback' => $request->feedback,
     ]);
         return redirect()->route('leaddash');
+    }
+    public function addestimate()
+    {
+        return view('sales/addestimate');
     }
     
 }

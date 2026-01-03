@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 //Sales//
 Route::get('/sales',[salescontroller::class,'salesdash'])->name('salesdashboard');
 Route::get('/sales-customer',[salescontroller::class,'salescus'])->name('salescustomer');
+Route::get('/sales-estimate',[salescontroller::class,'addestimate'])->name('addestimate');
 Route::get('/sales-lead',[salescontroller::class,'leaddash'])->name('leaddash');
 Route::post('/sales-New-lead',[salescontroller::class,'addlead'])->name('addlead');
 Route::post('/sales-lead-feedback',[salescontroller::class,'addfeedback'])->name('addfeedback');

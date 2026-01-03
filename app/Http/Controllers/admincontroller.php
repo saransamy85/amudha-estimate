@@ -24,7 +24,8 @@ class admincontroller extends Controller
             $escount=estimate::count();
             $cuscount=customers::count();
             $onl=User::where('Status','Online')->get();
-            return view('admin/dashboard',compact('estimates','escount','cuscount','onl'));
+            $lc=leads::count();
+            return view('admin/dashboard',compact('estimates','escount','cuscount','onl','lc'));
         }
         return redirect()->route('login')->with('error',"You must Login");
     }
@@ -91,10 +92,11 @@ class admincontroller extends Controller
     {
         $escount=estimate::count();
         $cuscount=customers::count();
+        $lc=leads::count();
         $onl=User::where('Status','Online')->get();
         $lds=leads::all();
         $leadfeed=leads::with('feedbacks')->get();
-        return view('admin/admin-lead',compact('onl','escount','cuscount','lds','leadfeed'));
+        return view('admin/admin-lead',compact('onl','escount','cuscount','lds','leadfeed','lc'));
     }
     public function admincus()
     {
