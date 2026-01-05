@@ -257,10 +257,28 @@
                             </div>
 
                             <div class="card-body">
-                                <p class="mb-1"><b>Mobile:</b> {{ $lead->Mobile }}</p>
-                                <p class="mb-1"><b>Product:</b> {{ $lead->Product }}</p>
-                                <p class="mb-1"><b>Site:</b> {{ $lead->Site_location }}</p>
-                                <p class="mb-3"><b>Status:</b> {{ $lead->Status }}</p>
+                                <table class="table table-responsive">
+                                    <thead>
+                                    <tr>
+                                        <th>Mobile</th>
+                                        <th>Product</th>
+                                        <th>Site</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{{ $lead->Mobile }}</td>
+                                        <td>{{ $lead->Product }}</td>
+                                        <td>{{ $lead->Site_location }}</td>
+                                        <td>{{ $lead->Status }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!-- <p class="mb-1"><b>Mobile:</b> </p>
+                                <p class="mb-1"><b>Product:</b> </p>
+                                <p class="mb-1"><b>Site:</b> </p>
+                                <p class="mb-3"><b>Status:</b> </p> -->
 
                                 <div class="timeline">
 

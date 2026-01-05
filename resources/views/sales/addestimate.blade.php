@@ -35,7 +35,7 @@
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
 
-                <a href="#" class="active">
+                <a href="{{route('leaddash')}}" class="active">
                     <i class="bi bi-file-earmark-text"></i> Leads
                 </a>
                 <a href="{{route('customers')}}">

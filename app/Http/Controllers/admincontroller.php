@@ -103,4 +103,5 @@ class admincontroller extends Controller
          $cli=customers::all();   
         return view('admin/customer',compact('cli'));
     }
+   
 }

@@ -12,8 +12,8 @@
             <i class="bi bi-file-earmark-text"></i> Leads
         </a>
 
-        <a href="#">
-            <i class="bi bi-box-seam"></i> Inventory
+        <a href="{{route('adminreport')}}">
+            <i class="bi bi-box-seam"></i> Reports
         </a>
 
         <a href="{{route('admincustomer')}}">

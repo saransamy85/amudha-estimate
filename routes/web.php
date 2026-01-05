@@ -3,8 +3,9 @@
 use App\Http\Controllers\estimatecontroller;
 use App\Http\Controllers\admincontroller;
 use App\Http\Controllers\customercontroller;
-use App\Http\Controllers\salescontroller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\salescontroller;
+use App\Http\Controllers\reportcontroller;
 
 
 // Route::get('/', function () {
@@ -45,5 +46,6 @@ Route::resource('estimates', estimatecontroller::class);
 
 Route::get('/admin-lead',[admincontroller::class,'adminlead'])->name('adminlead');
 Route::get('/admin-customer',[admincontroller::class,'admincus'])->name('admincustomer');
+Route::get('/admin-reports',[reportcontroller::class,'adminreport'])->name('adminreport');
 
 
