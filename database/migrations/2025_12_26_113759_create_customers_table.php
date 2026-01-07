@@ -21,6 +21,7 @@ class CreateCustomersTable extends Migration
             $table->string('Area');
             $table->string('Product');
             $table->string('Total_values');
+            $table->string('Status');
             $table->timestamps();
         });
     }

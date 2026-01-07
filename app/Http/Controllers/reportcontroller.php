@@ -24,8 +24,6 @@ class reportcontroller extends Controller
             $leadSC = leads::select('Status', \DB::raw('count(*) as total'))->groupBy('Status')->pluck('total', 'Status');
             $lsc = leads::select('source', \DB::raw('count(*) as total'))->groupBy('source')->pluck('total', 'source');
 
-
-
             $monthlyLeads = leads::select(
                     DB::raw('MONTH(created_at) as month'),
                     DB::raw('COUNT(*) as total')

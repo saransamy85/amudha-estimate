@@ -5,7 +5,7 @@
 @section('content')
 <div class="row md-4 g-3">
     <div class="col-md-4">
-        <h4>Active users</h4>
+        <h4>Online users</h4>
         <ul>
             @foreach($onl as $online)
             <li>{{$online->name}}</li>
@@ -14,106 +14,49 @@
     </div>
 </div>
 <div class="row mt-4 g-3">
-    <div class="col-md-4">
-        <div class="card p-3">
-            <h4 class="text-uppercase">estimates</h4>
-            {{$escount}}
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card p-3">
-            <h4 class="text-uppercase">Leads</h4>
-            {{$lc}}
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card p-3">
-            <h4 class="text-uppercase">Customers</h4>
-            {{$cuscount}}
-        </div>
-    </div>
-</div>
+                        <div class="col-md-6">
+                            <h3>Lead status</h3>
+                            <div class="row g-2">
+                        @foreach($leadSC as $status => $count)
+                        <div class="col-md-3 mb-3">
+                            <div class="card shadow-sm">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">{{ $status }}</h6>
+                                    <h3 class="fw-bold">{{ $count }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Lead Source</h3>
+                            <div class="row g-2">
+                        @foreach($lsc as $source => $count)
+                        <div class="col-md-3 mb-3">
+                            <div class="card shadow-sm">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">{{ $source }}</h6>
+                                    <h3 class="fw-bold">{{ $count }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        </div>
+                        </div>
+                    </div>
 <br>
 
 <div class="container-fluid">
     <div class="row mt-4 g-3">
-        <div class="col-md-4">
-            <div class="card md-4 p-3">
-                <form method="POST" action="{{route('addlead')}}">
-                    @csrf
-
-                    <!-- Source -->
-                    <div class="mb-3">
-                        <label>Source</label>
-                        <select name="source" class="form-control">
-                            <option value="Website">Website</option>
-                            <option value="Google Ads">Showroom-Walk-in</option>
-                            <option value="Phone Call">Phone Call</option>
-                            <option value="WhatsApp">Email or WhatsApp</option>
-                            <option value="Reference">Reference</option>
-                        </select>
-                    </div>
-
-                    <!-- Name -->
-                    <div class="mb-3">
-                        <label>Name</label>
-                        <input type="text" name="Name" class="form-control" required>
-                    </div>
-
-                    <!-- Mobile -->
-                    <div class="mb-3">
-                        <label>Mobile</label>
-                        <input type="text" name="Mobile" class="form-control" required>
-                    </div>
-
-                    <!-- Email -->
-                    <div class="mb-3">
-                        <label>Email</label>
-                        <input type="email" name="email" class="form-control">
-                    </div>
-
-                    <!-- Product -->
-                    <div class="mb-3">
-                        <label>Product</label>
-                        <input type="text" name="Product" class="form-control" required>
-                    </div>
-
-                    <!-- Total Area -->
-                    <div class="mb-3">
-                        <label>Total Area</label>
-                        <input type="text" name="Total_Area" class="form-control" required>
-                    </div>
-
-                    <!-- Description -->
-                    <div class="mb-3">
-                        <label>Description</label>
-                        <textarea name="Description" class="form-control"></textarea>
-                    </div>
-
-                    <!-- Site Location -->
-                    <div class="mb-3">
-                        <label>Site Location</label>
-                        <input type="text" name="Site_location" class="form-control" required>
-                    </div>
-
-                    <!-- Source -->
-                    <div class="mb-3">
-                        <label>Status</label>
-                        <select name="Status" class="form-control">
-                            <option value="Details shared">Details shared</option>
-                            <option value="Follow up">Follow up</option>
-                            <option value="Confirmed">Confirmed</option>
-                            <option value="Quote Shared">Quote Shared</option>
-                            <option value="RNR">RNR</option>
-                            <option value="Cancelled">Cancelled</option>
-                        </select>
-                    </div>
-
-                    <button class="btn btn-primary">Save Lead</button>
-                </form>
+        <div class="row g-2">
+            <div class="col-4">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddLeadModal">
+                    + AddLead
+                </button>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card md-4 p-3">
                 <table class="table table-responsive">
                     <thead>
@@ -141,7 +84,7 @@
                             <td>{{$leds->Site_location}}</td>
                             <td>{{$leds->Status}}</td>
                             <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-lead-id="{{ $leds->id }}">
                                     Feedback
                                 </button>
                                 <div class="modal fade" id="feedbackModal" tabindex="-1">
@@ -211,14 +154,24 @@
         @foreach($lds as $lead)
         <div class="card mb-4">
             <div class="card-header bg-primary text-white">
-                Lead Name: {{ $lead->id }} — {{ $lead->Name }}
+                Lead Name: {{ $lead->id }} : {{ $lead->Name }}
             </div>
 
             <div class="card-body">
-                <p class="mb-1"><b>Mobile:</b> {{ $lead->Mobile }}</p>
-                <p class="mb-1"><b>Product:</b> {{ $lead->Product }}</p>
-                <p class="mb-1"><b>Site:</b> {{ $lead->Site_location }}</p>
-                <p class="mb-3"><b>Status:</b> {{ $lead->Status }}</p>
+                <table class="table table-responsive">
+                    <tr>
+                        <th><b>Mobile</b></th>
+                        <th><b>Product</b></th>
+                        <th><b>Site</b></th>
+                        <th><b>Status</b></th>
+                    </tr>
+                    <tr>
+                        <td>{{ $lead->Mobile }}</td>
+                        <td>{{ $lead->Product }}</td>
+                        <td>{{ $lead->Site_location }}</td>
+                        <td>{{ $lead->Status }}</td>
+                    </tr>
+                </table>
 
                 <div class="timeline">
 
@@ -257,5 +210,114 @@
         @endforeach
     </div>
 </div>
+
+<!--AddLead Model-->
+<div class="modal fade" id="AddLeadModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <form method="POST" action="{{route('addlead')}}">
+                @csrf
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Feedback</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                     <!-- Source -->
+                    <div class="mb-3">
+                        <label>Source</label>
+                        <select name="source" class="form-control">
+                            <option value="Website">Website</option>
+                            <option value="Google Ads">Showroom-Walk-in</option>
+                            <option value="Phone Call">Phone Call</option>
+                            <option value="WhatsApp">Email or WhatsApp</option>
+                            <option value="Reference">Reference</option>
+                        </select>
+                    </div>
+
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label>Name</label>
+                        <input type="text" name="Name" class="form-control" required>
+                    </div>
+
+                    <!-- Mobile -->
+                    <div class="mb-3">
+                        <label>Mobile</label>
+                        <input type="text" name="Mobile" class="form-control" required>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+
+                    <!-- Product -->
+                    <div class="mb-3">
+                        <label>Product</label>
+                        <input type="text" name="Product" class="form-control" required>
+                    </div>
+
+                    <!-- Total Area -->
+                    <div class="mb-3">
+                        <label>Total Area</label>
+                        <input type="text" name="Total_Area" class="form-control" required>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label>Description</label>
+                        <textarea name="Description" class="form-control"></textarea>
+                    </div>
+
+                    <!-- Site Location -->
+                    <div class="mb-3">
+                        <label>Site Location</label>
+                        <input type="text" name="Site_location" class="form-control" required>
+                    </div>
+
+                    <!-- Source -->
+                    <div class="mb-3">
+                        <label>Status</label>
+                        <select name="Status" class="form-control">
+                            <option value="Details shared">Details shared</option>
+                            <option value="Follow up">Follow up</option>
+                            <option value="Confirmed">Confirmed</option>
+                            <option value="Quote Shared">Quote Shared</option>
+                            <option value="RNR">RNR</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">
+                        Save Feedback
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--End addlead model-->
+
+<script>
+    document.getElementById('feedbackModal')
+        .addEventListener('show.bs.modal', function(event) {
+
+            let button = event.relatedTarget;
+            let leadId = button.getAttribute('data-lead-id');
+
+            document.getElementById('lead_id').value = leadId;
+        });
+    </script>
 
 @endsection

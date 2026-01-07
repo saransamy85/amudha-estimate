@@ -90,13 +90,19 @@ class admincontroller extends Controller
 
     public function adminlead()
     {
-        $escount=estimate::count();
-        $cuscount=customers::count();
+        if(Auth::user()->Role=="Admin")
+        {
+        
+        
         $lc=leads::count();
         $onl=User::where('Status','Online')->get();
         $lds=leads::all();
         $leadfeed=leads::with('feedbacks')->get();
-        return view('admin/admin-lead',compact('onl','escount','cuscount','lds','leadfeed','lc'));
+        $leadSC = leads::select('Status', \DB::raw('count(*) as total'))->groupBy('Status')->pluck('total', 'Status');
+        $lsc = leads::select('source', \DB::raw('count(*) as total'))->groupBy('source')->pluck('total', 'source');
+        return view('admin/admin-lead',compact('onl','lds','leadfeed','lc','leadSC','lsc'));
+        }
+        return redirect()->route('leaddash');
     }
     public function admincus()
     {

@@ -72,7 +72,7 @@
                                 <div class="card-body">
                                     {{$todayCount}}
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -138,17 +138,6 @@
                                                         PDF
                                                     </a>
 
-                                                    <!-- <form action="{{ route('estimates.destroy', $estimate->id) }}"
-                                      method="POST"
-                                      style="display:inline-block"
-                                      onsubmit="return confirm('Are you sure you want to delete this estimate?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-danger">
-                                        Delete
-                                    </button>
-                                </form>
-                            </td> -->
                                             </tr>
                                             @empty
                                             <tr>
@@ -159,7 +148,11 @@
                                             @endforelse
                                         </tbody>
                                     </table>
+                                    <div class="d-flex justify-content-end">
+                                        {{ $estimates->links() }}
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>

@@ -66,6 +66,9 @@
             <div class="page-content">
                 <div class="container-fluid">
                     <div class="row mt-4 g-3">
+                        <div class="col-md-6">
+                            <h3>Lead status</h3>
+                            <div class="row g-2">
                         @foreach($leadSC as $status => $count)
                         <div class="col-md-3 mb-3">
                             <div class="card shadow-sm">
@@ -76,6 +79,23 @@
                             </div>
                         </div>
                         @endforeach
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Lead Source</h3>
+                            <div class="row g-2">
+                        @foreach($lsc as $source => $count)
+                        <div class="col-md-3 mb-3">
+                            <div class="card shadow-sm">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">{{ $source }}</h6>
+                                    <h3 class="fw-bold">{{ $count }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        </div>
+                        </div>
                     </div>
                     <div class="row mt-4 g-3">
                         <div class="col-md-4">
@@ -172,7 +192,8 @@
                                     </thead>
                                     <tbody>
                                         @foreach($lds as $leds)
-                                        <tr>
+                                        <tr class="@if(strtolower($leds->Status) == 'cancelled') table-danger
+                                                    @elseif (strtolower($leds->Status)=='confirmed') table-success @endif">
                                             <td>{{$leds->created_at->format('d M Y')}}</td>
                                             <td>{{$leds->source}}</td>
                                             <td>{{$leds->Name}}</td>
@@ -259,20 +280,20 @@
                             <div class="card-body">
                                 <table class="table table-responsive">
                                     <thead>
-                                    <tr>
-                                        <th>Mobile</th>
-                                        <th>Product</th>
-                                        <th>Site</th>
-                                        <th>Status</th>
-                                    </tr>
+                                        <tr>
+                                            <th>Mobile</th>
+                                            <th>Product</th>
+                                            <th>Site</th>
+                                            <th>Status</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>{{ $lead->Mobile }}</td>
-                                        <td>{{ $lead->Product }}</td>
-                                        <td>{{ $lead->Site_location }}</td>
-                                        <td>{{ $lead->Status }}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $lead->Mobile }}</td>
+                                            <td>{{ $lead->Product }}</td>
+                                            <td>{{ $lead->Site_location }}</td>
+                                            <td>{{ $lead->Status }}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <!-- <p class="mb-1"><b>Mobile:</b> </p>

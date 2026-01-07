@@ -23,6 +23,7 @@ class customercontroller extends Controller
             'Area'=>$request->cusarea,
             'Product'=>$request->cusproduct,
             'Total_values'=>$request->cusvalue,
+            'Status'=>$request->Status,
         ]);
         return redirect()->route('customers');
     }

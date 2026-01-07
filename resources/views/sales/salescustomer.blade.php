@@ -74,7 +74,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="card p-3">
                                 <table class="table table-responsive">
                                     <thead>
@@ -89,7 +89,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($cli as $cl)
+                                        @forelse($cli as $cl)
                                         <tr>
                                             <td>
                                                 {{$cl->client_name}}
@@ -113,9 +113,16 @@
                                                 {{$cl->Total_values}}
                                             </td>
                                         </tr>
-                                        @endforeach
+                                        @empty
+                                        <tr>
+                                            <td colspan="4" class="text-center">No Data Found</td>
+                                        </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
+                                <div class="d-flex justify-content-end">
+                                    {{ $cli->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -156,6 +163,14 @@
                         <div class="mb-3">
                             <label for="product">Product</label>
                             <input type="text" class="form-control" name="cusproduct" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Status</label>
+                            <select name="Status" class="form-control">
+                                <option value="Not Yet to Start">Not Yet to Start</option>
+                                <option value="Progress">Progress</option>
+                                <option value="Complete">Complete</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="values">Values</label>

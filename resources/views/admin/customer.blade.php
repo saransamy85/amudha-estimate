@@ -95,7 +95,16 @@
                         <label for="values">Values</label>
                         <input type="text" class="form-control" name="cusvalue" required>
                     </div>
+                    <div class="mb-3">
+                        <label>Status</label>
+                        <select name="Status" class="form-control">
+                            <option value="Not Yet to Start">Not Yet to Start</option>
+                            <option value="Progress">Progress</option>
+                            <option value="Complete">Complete</option>
+                        </select>
+                    </div>
                 </div>
+
 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Save

@@ -15,6 +15,7 @@ class customers extends Model
         'Area',
         'Product',
         'Total_values',
+        'Status',
 
     ];
 }
