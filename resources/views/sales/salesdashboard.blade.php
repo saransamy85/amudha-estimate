@@ -36,15 +36,16 @@
                 </a>
 
                 <a href="{{route('leaddash')}}">
-                    <i class="bi bi-file-earmark-text"></i> Leads
+                    <i class="bi bi-file-earmark-text"></i> Leads <span class="badge text-bg-danger">{{$lc}}</span>
                 </a>
                 <a href="{{route('salescustomer')}}">
                     <i class="bi bi-people"></i> Customers
                 </a>
-
-                <a href="{{route('logout')}}">
-                    <i class="bi bi-gear"></i> Log Out
+                <a href="{{route('salesgreetings')}}">
+                    <i class="bi bi-people"></i> Greetings
                 </a>
+
+               
             </nav>
         </aside>
 
@@ -56,34 +57,84 @@
             <nav class="topbar">
                 <h5 class="mb-0">@yield('title')</h5>
 
-                <div class="topbar-right">
-                    <i class="bi bi-bell"></i>
-                    {{session('username')}}
-                </div>
+                <div class="topbar-right d-flex align-items-center">
+
+    <i class="bi bi-bell me-3"></i>
+
+    <div class="dropdown">
+        <a href="#"
+           class="text-dark text-decoration-none dropdown-toggle"
+           data-bs-toggle="dropdown"
+           aria-expanded="false">
+
+            {{ session('username') }}
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-end">
+           
+
+            <li>
+                <a class="dropdown-item text-danger"
+                   href="{{ route('logout') }}">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</div>
             </nav>
 
             <!-- PAGE CONTENT -->
             <div class="page-content">
                 <div class="container-fluid">
-                    <div class="row mt-4 g-3">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header">Today</div>
-                                <div class="card-body">
-                                    {{$todayCount}}
-                                </div>
-
-                            </div>
+                    <div class="dashboard-section">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                             <div class="d-flex align-items-center">
+                                    <div class="section-icon">
+                                         <i class="bi bi-graph-up"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h3 class="mb-0">Summary</h3>
+                                    </div>
+                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header">Month</div>
-                                <div class="card-body">
-                                    {{$monthlyCount}}
+                        <div class="row g-3">
+                             <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="modern-card">
+                                    <div class="icon-box text-primary">
+                                        <i class="bi bi-file-earmark-text"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="text-muted mb-2">
+                                            Today
+                                        </h6>
+                                        <h2 class="fw-bold mb-3">
+                                            {{$todayCount}}
+                                        </h2>
+                                    </div>
+                                    
                                 </div>
-                            </div>
+                             </div>
+                             <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="modern-card">
+                                    <div class="icon-box text-primary">
+                                        <i class="bi bi-file-earmark-text"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="text-muted mb-2">
+                                            Month
+                                        </h6>
+                                        <h2 class="fw-bold mb-3">
+                                            {{$monthlyCount}}
+                                        </h2>
+                                    </div>
+                                    
+                                </div>
+                             </div>
                         </div>
                     </div>
+                    <br>
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4>Estimate List</h4>
                         <a href="{{ route('addestimate') }}" class="btn btn-primary">

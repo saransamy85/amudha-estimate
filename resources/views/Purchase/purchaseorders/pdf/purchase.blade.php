@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Purchase Order</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+        body {
+
+            margin: 15mm;
+            padding: 0;
+            font-family: "Times New Roman", serif;
+            font-size: 14px;
+        }
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+        }
+
+        .border {
+
+            border: 2px solid #222;
+
+        }
+
+        .border td,
+        .border th {
+
+            border: 1px solid #222;
+
+        }
+
+        .header {
+
+            text-align: center;
+
+            line-height: 22px;
+
+        }
+
+        .company {
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            color: #d40000;
+
+        }
+
+        .address {
+
+            font-size: 14px;
+
+            color: #6b2a2a;
+
+        }
+
+        .unit {
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            color: #8b2b2b;
+
+        }
+
+        .phone {
+
+            color: blue;
+
+            font-size: 15px;
+
+        }
+
+        .title {
+
+            text-align: center;
+
+            font-size: 16px;
+
+            color: #6b2a2a;
+
+        }
+
+        .left {
+
+            width: 65%;
+
+            vertical-align: top;
+
+            padding: 5px;
+
+        }
+
+        .right {
+
+            width: 35%;
+
+            vertical-align: top;
+
+            padding: 5px;
+
+        }
+
+        .site {
+
+            color: red;
+
+            font-size: 18px;
+
+            margin-top: 20px;
+
+        }
+
+        .centerText {
+
+            text-align: center;
+
+            padding: 25px 0;
+
+            font-size: 18px;
+
+        }
+
+        .bold {
+
+            font-weight: bold;
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <table class="border">
+
+        <!-- HEADER -->
+
+        <tr>
+
+            <td colspan="2">
+
+                <div class="header">
+
+                    <div class="company">
+
+                        AMUDHA DECORS
+
+                    </div>
+
+                    <div class="address">
+
+                        Reg off: No.72, 40 Feet Road, 1st Floor,
+
+                        Lakshmi Nagar, Porur, Chennai – 116.
+
+                    </div>
+
+                    <div class="unit">
+
+                        Unit at: No.2/27, Krishnan Industrial Estate,
+
+                        Mettukuppam, Vanagaram,
+
+                        Chennai – 95.
+
+                    </div>
+
+                    <div class="unit">
+
+                        Website:
+
+                        www.amudhadecors.com
+
+                        /
+
+                        E-mail:
+
+                        admin@amudhadecors.com
+
+                    </div>
+
+                    <div class="phone">
+
+                        Phone :
+
+                        98419 11186 /
+
+                        Cell :
+
+                        98410 11186
+
+                    </div>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+        <!-- TITLE -->
+
+        <tr>
+
+            <td colspan="2" class="title">
+
+                PURCHASE ORDER
+
+            </td>
+
+        </tr>
+
+        <!-- Vendor & PO -->
+
+        <tr>
+
+            <td class="left">
+
+                To
+
+                <br>
+
+                <strong>
+
+                    M/s.
+
+                    {{ $po->vendor->company_name }}
+
+                </strong>
+
+                <br>
+
+                {{ $po->vendor->address }}
+
+                <br>
+
+                {{ $po->vendor->city }}
+
+            </td>
+
+            <td class="right">
+
+                P.O.No:{{ $po->po_no }}
+
+                Date:{{ date('d.m.Y', strtotime($po->po_date)) }}
+
+            </td>
+
+        </tr>
+
+        <!-- SITE -->
+
+        <tr>
+
+            <td colspan="2">
+
+                <div class="site">
+
+                    SITE AT :
+
+                    {{ $po->customer->Location }}
+
+                </div>
+
+                <br>
+
+                Dear Sir,
+
+            </td>
+
+        </tr>
+
+        <!-- MESSAGE -->
+
+        <tr>
+
+            <td colspan="2">
+
+                <div class="centerText">
+
+                    We are pleased to place an order for the following products.
+
+                </div>
+
+            </td>
+
+        </tr>
+
+        <!-- MATERIAL TABLE STARTS IN PART 2 -->
+        <!-- MATERIAL TABLE -->
+
+        @if ($po->po_template == 'anchor')
+
+            <tr>
+
+                <td colspan="2" style="padding:0;">
+
+                    <table class="border">
+
+                        <thead>
+
+                            <tr style="font-weight:bold;text-align:center;">
+
+                                <th width="32%">MATERIAL</th>
+
+                                <th width="12%">DIA</th>
+
+                                <th width="12%">LENGTH</th>
+
+                                <th width="15%">NOS</th>
+
+                                <th width="15%">RATE/PER NOS</th>
+
+                                <th width="14%">AMOUNT</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach ($po->items as $item)
+                                <tr style="text-align:center;">
+
+                                    <td>
+
+                                        {{ $item->material }}
+
+                                    </td>
+
+                                    <td>
+
+                                        {{ $item->dia }}
+
+                                    </td>
+
+                                    <td>
+
+                                        {{ $item->length }}
+
+                                    </td>
+
+                                    <td>
+
+                                        {{ $item->nos }}
+
+                                    </td>
+
+                                    <td>
+
+                                        {{ number_format((float) $item->rate, 2) }}
+
+                                    </td>
+
+                                    <td>
+
+                                        {{ number_format((float) $item->amount, 2) }}
+
+                                    </td>
+
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+
+                    </table>
+
+                </td>
+
+            </tr>
+
+        @endif
+
+
+        @if ($po->po_template == 'steelplate')
+
+            <tr>
+
+                <td colspan="2" style="padding:0;">
+
+                    <table class="border">
+
+                        <thead>
+
+                            <tr align="center">
+
+                                <th>S.NO</th>
+
+                                <th>Material</th>
+
+                                <th>Size</th>
+
+                                <th>Thickness</th>
+
+                                <th>Approx Weight</th>
+
+                                <th>Rate/KG</th>
+
+                                <th>Amount</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach ($po->items as $item)
+                                <tr align="center">
+
+                                    <td>{{ $loop->iteration }}</td>
+
+                                    <td>{{ $item->material }}</td>
+
+                                    <td>{{ $item->size }}</td>
+
+                                    <td>{{ $item->thickness }}</td>
+
+                                    <td>{{ $item->approx_weight }}</td>
+
+                                    <td>{{ number_format((float) $item->rate, 2) }}</td>
+
+                                    <td>{{ number_format((float) $item->amount, 2) }}</td>
+
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+
+                    </table>
+
+                </td>
+
+            </tr>
+
+        @endif
+
+
+        @if ($po->po_template == 'fabrication')
+
+            <tr>
+
+                <td colspan="2" style="padding:0;">
+
+                    <table class="border">
+
+                        <thead>
+
+                            <tr align="center">
+
+                                <th>Material</th>
+
+                                <th>Size</th>
+
+                                <th>Thickness</th>
+
+                                <th>Qty</th>
+
+                                <th>Rate</th>
+
+                                <th>Amount</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach ($po->items as $item)
+                                <tr align="center">
+
+                                    <td>{{ $item->material }}</td>
+
+                                    <td>{{ $item->size }}</td>
+
+                                    <td>{{ $item->thickness }}</td>
+
+                                    <td>{{ $item->qty }}</td>
+
+                                    <td>{{ number_format((float) $item->rate, 2) }}</td>
+
+                                    <td>{{ number_format((float) $item->amount, 2) }}</td>
+
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+
+                    </table>
+
+                </td>
+
+            </tr>
+
+        @endif
+
+
+        @if ($po->po_template == 'sandwichpanel')
+
+            <tr>
+
+                <td colspan="2" style="padding:0;">
+
+                    <table class="border">
+
+                        <thead>
+
+                            <tr align="center">
+
+                                <th>Material</th>
+
+                                <th>Width</th>
+
+                                <th>Thickness</th>
+
+                                <th>Colour</th>
+
+                                <th>Qty</th>
+
+                                <th>Rate</th>
+
+                                <th>Amount</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach ($po->items as $item)
+                                <tr align="center">
+
+                                    <td>{{ $item->material }}</td>
+
+                                    <td>{{ $item->width }}</td>
+
+                                    <td>{{ $item->thickness }}</td>
+
+                                    <td>{{ $item->color }}</td>
+
+                                    <td>{{ $item->qty }}</td>
+
+                                    <td>{{ number_format((float) $item->rate, 2) }}</td>
+
+                                    <td>{{ number_format((float) $item->amount, 2) }}</td>
+
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+
+                    </table>
+
+                </td>
+
+            </tr>
+
+        @endif
+
+
+        <!-- TOTALS -->
+
+        <tr>
+
+            <td width="65%" style="height:130px;">
+
+                &nbsp;
+
+            </td>
+
+            <td width="35%" style="padding:0;">
+
+                <table class="border">
+
+                    <tr>
+
+                        <td align="center">
+
+                            <b>TOTAL</b>
+
+                        </td>
+
+                        <td align="right">
+
+                            <b>
+
+                                {{ number_format((float) $po->subtotal, 2) }}
+
+                            </b>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td align="center" style="color:red;">
+
+                            <b>
+
+                                GST {{ $po->gst_percent }}%
+
+                            </b>
+
+                        </td>
+
+                        <td align="right" style="color:red;">
+
+                            <b>
+
+                                {{ number_format((float) $po->gst_amount, 2) }}
+
+                            </b>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td align="center" style="font-size:20px;color:red;">
+
+                            <b>
+
+                                G.TOTAL
+
+                            </b>
+
+                        </td>
+
+                        <td align="right" style="font-size:20px;color:red;">
+
+                            <b>
+
+                                {{ number_format((float) $po->grand_total, 2) }}
+
+                            </b>
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+            </td>
+
+        </tr>
+        <!-- BILLING ADDRESS & SIGNATURE -->
+
+        <tr>
+
+            <td style="padding:15px; vertical-align:top;">
+
+                <div style="color:red;font-size:18px;font-weight:bold;">
+
+                    BILLING ADDRESS
+
+                </div>
+
+                <br>
+
+                <div style="font-size:16px; line-height:26px;">
+
+                    <strong>{{ $po->company }}</strong>
+
+                    <br>
+
+                    No.72, 40 Feet Road
+
+                    <br>
+
+                    Lakshmi Nagar
+
+                    <br>
+
+                    Porur
+
+                    <br>
+
+                    Chennai - 600116
+
+                    <br>
+
+                    <strong>
+
+                        GSTIN : 33AANPS2720G1ZS
+
+                    </strong>
+
+                </div>
+
+            </td>
+
+            <td style="padding:15px; vertical-align:bottom;">
+
+                <div style="text-align:center;">
+
+                    <strong>
+
+                        Authorised Signatory.
+
+                    </strong>
+
+                    <br><br>
+
+                    <span style="color:red;font-size:18px;">
+
+                        {{ strtoupper($po->created_by) }}
+
+                    </span>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+
+    </table>
+
+</body>
+
+</html>

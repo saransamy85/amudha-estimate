@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Models\customers;
+use App\Models\estimate;
+use App\Models\leads;
+use App\Models\User;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +31,15 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Paginator::useBootstrapFive();
+        View::composer('*', function ($view) {
+            $view->with('onlineUsers',
+                User::where('Status', 'Online')->get());
+
+            $view->with('escount', estimate::count());
+
+            $view->with('cuscount', customers::count());
+
+            $view->with('lc', leads::count());
+        });
     }
 }

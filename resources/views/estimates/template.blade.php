@@ -43,7 +43,7 @@ th,td{
 <table class="no-border">
 <tr>
 <td width="100%">
-    <img src="{{ asset('images/Header-5-1-1.jpg') }}" width="100%" height="100%">
+    <img src="{{ asset('images/header_2.jpg') }}" width="100%" height="100%">
 </td>
 
 </tr>
@@ -97,14 +97,35 @@ Mobile: {{ $estimate->mobile }}
 @endforeach
 
 <tr>
-<td colspan="3" class="text-right">GST {{ (int) $estimate->gst_percent }}%</td>
-<td class="text-right">{{ number_format($estimate->gst_amount,2) }}</td>
+    <td colspan="3" class="text-right">
+        GST {{ (int) $estimate->gst_percent }}%
+    </td>
+    <td class="text-right">
+        {{ number_format($estimate->gst_amount,2) }}
+    </td>
 </tr>
 
+@if($estimate->transport_charges > 0)
 <tr>
-<td colspan="3" class="text-right"><b>Total</b></td>
-<td class="text-right"><b>{{ number_format($estimate->net_total,2) }}</b></td>
+    <td colspan="3" class="text-right">
+        Transportation Charges
+    </td>
+    <td class="text-right">
+        {{ number_format($estimate->transport_charges,2) }}
+    </td>
 </tr>
+@endif
+
+<tr>
+    <td colspan="3" class="text-right">
+        <b>Total</b>
+    </td>
+    <td class="text-right">
+        <b>{{ number_format($estimate->net_total,2) }}</b>
+    </td>
+</tr>
+
+
 </table>
 
 <!-- NOTES -->

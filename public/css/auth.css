@@ -1,0 +1,488 @@
+/*==========================================
+    AMUDHA CRM AUTH PAGE
+===========================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+
+    --primary: #2563eb;
+    --secondary: #1e40af;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --dark: #0f172a;
+    --light: #f8fafc;
+    --text: #475569;
+    --border: #e2e8f0;
+
+}
+
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+body {
+
+    background:
+        linear-gradient(135deg, #eef5ff, #dbeafe);
+
+    overflow-x: hidden;
+
+}
+
+/*============================*/
+
+.auth-wrapper {
+
+    min-height: 100vh;
+
+}
+
+/*============================*/
+
+.auth-panel {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 60px;
+
+    background: white;
+
+}
+
+/*============================*/
+
+.auth-card {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    background: white;
+
+    padding: 45px;
+
+    border-radius: 25px;
+
+    box-shadow:
+
+        0 20px 45px rgba(0, 0, 0, .08);
+
+}
+
+/*============================*/
+
+.auth-card h2 {
+
+    font-weight: 700;
+
+    color: var(--dark);
+
+}
+
+.auth-card p {
+
+    color: #64748b;
+
+}
+
+/*============================*/
+
+.logo {
+
+    width: 110px;
+
+}
+
+/*============================*/
+
+.illustration-section {
+
+    background:
+
+        linear-gradient(135deg,
+
+            #2563eb,
+
+            #1e3a8a);
+
+    position: relative;
+
+    overflow: hidden;
+
+    color: white;
+
+}
+
+/*============================*/
+
+.illustration-section::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 550px;
+
+    height: 550px;
+
+    background:
+
+        rgba(255, 255, 255, .08);
+
+    border-radius: 50%;
+
+    top: -180px;
+
+    left: -120px;
+
+}
+
+.illustration-section::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+
+    height: 420px;
+
+    background:
+
+        rgba(255, 255, 255, .05);
+
+    border-radius: 50%;
+
+    right: -100px;
+
+    bottom: -100px;
+
+}
+
+/*============================*/
+
+.illustration-content {
+
+    width: 80%;
+
+    margin: auto;
+
+    z-index: 2;
+
+    position: relative;
+
+}
+
+/*============================*/
+
+.illustration-content h1 {
+
+    font-size: 52px;
+
+    font-weight: 800;
+
+    line-height: 1.15;
+
+    margin-bottom: 20px;
+
+}
+
+.illustration-content p {
+
+    color: #dbeafe;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+}
+
+/*============================*/
+
+.feature-list {
+
+    margin-top: 40px;
+
+}
+
+.feature-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+
+    font-size: 17px;
+
+}
+
+.feature-item i {
+
+    font-size: 22px;
+
+    color: #facc15;
+
+}
+
+/*============================*/
+
+.form-control {
+
+    border: none;
+
+    height: 55px;
+
+    border-radius: 0 15px 15px 0;
+
+    font-size: 15px;
+
+    box-shadow: none;
+
+}
+
+.form-control:focus {
+
+    box-shadow: none;
+
+}
+
+/*============================*/
+
+.input-group {
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--border);
+
+    transition: .35s;
+
+}
+
+.input-group:hover {
+
+    border-color: var(--primary);
+
+}
+
+.input-group-text {
+
+    background: white;
+
+    border: none;
+
+    color: var(--primary);
+
+    width: 55px;
+
+    justify-content: center;
+
+}
+
+.btn-outline-secondary {
+
+    border: none;
+
+}
+
+/*=====================================
+Role Cards
+======================================*/
+
+.role-card {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border: 2px solid #e5e7eb;
+
+    border-radius: 18px;
+
+    height: 115px;
+
+    cursor: pointer;
+
+    transition: .35s;
+
+    background: white;
+
+}
+
+.role-card i {
+
+    font-size: 30px;
+
+    color: #2563eb;
+
+    margin-bottom: 10px;
+
+}
+
+.role-card span {
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #334155;
+
+}
+
+.btn-check:checked+.role-card {
+
+    background: #2563eb;
+
+    border-color: #2563eb;
+
+    transform: translateY(-5px);
+
+    box-shadow:
+
+        0 18px 35px rgba(37, 99, 235, .28);
+
+}
+
+.btn-check:checked+.role-card i,
+
+.btn-check:checked+.role-card span {
+
+    color: white;
+
+}
+
+/*=====================================
+Register Button
+======================================*/
+
+.btn-register {
+
+    height: 55px;
+
+    border-radius: 15px;
+
+    background:
+
+        linear-gradient(135deg,
+
+            #2563eb,
+
+            #1e40af);
+
+    border: none;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    transition: .35s;
+
+}
+
+.btn-register:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+
+        0 20px 40px rgba(37, 99, 235, .35);
+
+}
+
+/*=====================================
+Links
+======================================*/
+
+a {
+
+    text-decoration: none;
+
+    color: #2563eb;
+
+    font-weight: 600;
+
+}
+
+a:hover {
+
+    color: #1d4ed8;
+
+}
+
+/*=====================================
+Copyright
+======================================*/
+
+.copyright {
+
+    text-align: center;
+
+    color: #94a3b8;
+
+    margin-top: 30px;
+
+    font-size: 13px;
+
+}
+
+/*=====================================
+Responsive
+======================================*/
+
+@media(max-width:992px) {
+
+    .illustration-section {
+
+        display: none !important;
+
+    }
+
+    .auth-panel {
+
+        padding: 30px;
+
+    }
+
+}
+
+@media(max-width:576px) {
+
+    .auth-card {
+
+        padding: 30px 20px;
+
+        border-radius: 18px;
+
+    }
+
+    .role-card {
+
+        height: 90px;
+
+    }
+
+    .illustration-content h1 {
+
+        font-size: 36px;
+
+    }
+
+}

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title','Sales-Dashboard')</title>
+    <title>@yield('title', 'Sales-Dashboard')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap 5 CDN -->
@@ -15,7 +15,7 @@
     <!-- ApexCharts -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-    <link rel="stylesheet" href="{{asset('css/admin.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
 
 </head>
@@ -35,14 +35,17 @@
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
 
-                <a href="{{route('leaddash')}}">
+                <a href="{{ route('leaddash') }}">
                     <i class="bi bi-file-earmark-text"></i> Leads
                 </a>
-                <a href="{{route('customers')}}" class="active">
+                <a href="{{ route('customers') }}" class="active">
                     <i class="bi bi-people"></i> Customers
                 </a>
+                <a href="{{ route('salesgreetings') }}">
+                    <i class="bi bi-people"></i> Greetings
+                </a>
 
-                <a href="{{route('logout')}}">
+                <a href="{{ route('logout') }}">
                     <i class="bi bi-gear"></i> Log Out
                 </a>
             </nav>
@@ -58,7 +61,7 @@
 
                 <div class="topbar-right">
                     <i class="bi bi-bell"></i>
-                    {{session('username')}}
+                    {{ session('username') }}
                 </div>
             </nav>
 
@@ -90,33 +93,33 @@
                                     </thead>
                                     <tbody>
                                         @forelse($cli as $cl)
-                                        <tr>
-                                            <td>
-                                                {{$cl->client_name}}
-                                            </td>
-                                            <td>
-                                                {{$cl->created_at->format('d-m-Y')}}
-                                            </td>
-                                            <td>
-                                                {{$cl->Mobile}}
-                                            </td>
-                                            <td>
-                                                {{$cl->Location}}
-                                            </td>
-                                            <td>
-                                                {{$cl->Area}} Sq.ft
-                                            </td>
-                                            <td>
-                                                {{$cl->Product}}
-                                            </td>
-                                            <td>
-                                                {{$cl->Total_values}}
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    {{ $cl->client_name }}
+                                                </td>
+                                                <td>
+                                                    {{ $cl->created_at->format('d-m-Y') }}
+                                                </td>
+                                                <td>
+                                                    {{ $cl->Mobile }}
+                                                </td>
+                                                <td>
+                                                    {{ $cl->Location }}
+                                                </td>
+                                                <td>
+                                                    {{ $cl->Area }} Sq.ft
+                                                </td>
+                                                <td>
+                                                    {{ $cl->Product }}
+                                                </td>
+                                                <td>
+                                                    {{ $cl->Total_values }}
+                                                </td>
+                                            </tr>
                                         @empty
-                                        <tr>
-                                            <td colspan="4" class="text-center">No Data Found</td>
-                                        </tr>
+                                            <tr>
+                                                <td colspan="4" class="text-center">No Data Found</td>
+                                            </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
@@ -136,7 +139,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form method="Post" action="{{route('addcustomers')}}">
+                <form method="Post" action="{{ route('addcustomers') }}">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title">New Customer</h5>
@@ -164,14 +167,7 @@
                             <label for="product">Product</label>
                             <input type="text" class="form-control" name="cusproduct" required>
                         </div>
-                        <div class="mb-3">
-                            <label>Status</label>
-                            <select name="Status" class="form-control">
-                                <option value="Not Yet to Start">Not Yet to Start</option>
-                                <option value="Progress">Progress</option>
-                                <option value="Complete">Complete</option>
-                            </select>
-                        </div>
+
                         <div class="mb-3">
                             <label for="values">Values</label>
                             <input type="text" class="form-control" name="cusvalue" required>
@@ -179,8 +175,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Save
-                            Feedback</button>
+                        <button type="submit" class="btn btn-success">Save</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Cancel
                         </button>

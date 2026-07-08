@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class estimate extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'estimate_no',
         'estimate_date',
@@ -18,6 +19,7 @@ class estimate extends Model
         'subtotal',
         'gst_percent',
         'gst_amount',
+        'transport_charges',
         'net_total',
         'estimatedby',
     ];

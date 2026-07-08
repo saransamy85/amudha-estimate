@@ -1,36 +1,500 @@
+/* ==============================
+   AMUDHA CRM LOGIN
+==============================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
 body {
-    background: linear-gradient(135deg, #7b1f1f, #a52a2a);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    background: #edf2f7;
+
+    overflow: hidden;
+
 }
 
-.login-card {
+/*==============================
+Background
+===============================*/
+
+.login-wrapper {
+
     width: 100%;
-    max-width: 420px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    background: #ffffff;
+
+    height: 100vh;
+
 }
 
-.brand {
-    font-weight: 700;
-    color: #7b1f1f;
+/*==============================
+Left Panel
+===============================*/
+
+.login-panel {
+
+    background: #fff;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 60px;
+
+    position: relative;
+
+    z-index: 10;
+
+}
+
+.login-box {
+
+    width: 100%;
+
+    max-width: 430px;
+
+}
+
+.company-logo {
+
+    width: 95px;
+
+    margin-bottom: 15px;
+
+}
+
+.company-name {
+
+    font-weight: 800;
+
+    color: #0f172a;
+
     letter-spacing: 1px;
+
 }
 
-.login-card p {
+.company-subtitle {
+
+    color: #64748b;
+
     font-size: 14px;
+
 }
 
-.btn-danger {
-    background-color: #7b1f1f;
-    border-color: #7b1f1f;
+.welcome-title {
+
+    font-weight: 700;
+
+    color: #0f172a;
+
 }
 
-.btn-danger:hover {
-    background-color: #5e1717;
-    border-color: #5e1717;
+.welcome-text {
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+}
+
+/*==============================
+Input
+===============================*/
+
+.form-group label {
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+
+    display: block;
+
+}
+
+.input-group {
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .06);
+
+}
+
+.input-group-text {
+
+    background: #fff;
+
+    border: none;
+
+    color: #2563eb;
+
+    padding: 15px;
+
+}
+
+.form-control {
+
+    border: none;
+
+    padding: 15px;
+
+    font-size: 15px;
+
+    box-shadow: none !important;
+
+}
+
+.form-control:focus {
+
+    background: #fff;
+
+}
+
+.btn-outline-secondary {
+
+    border: none;
+
+}
+
+/*==============================
+Button
+===============================*/
+
+.btn-login {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+
+    color: #fff;
+
+    border: none;
+
+    font-weight: 600;
+
+    transition: .35s;
+
+    box-shadow: 0 12px 25px rgba(37, 99, 235, .35);
+
+}
+
+.btn-login:hover {
+
+    transform: translateY(-3px);
+
+    color: #fff;
+
+    box-shadow: 0 20px 35px rgba(37, 99, 235, .45);
+
+}
+
+/*==============================
+Footer
+===============================*/
+
+.footer-text {
+
+    margin-top: 40px;
+
+    text-align: center;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+
+}
+
+/*==============================
+Right Panel
+===============================*/
+
+.info-panel {
+
+    background: url("../images/Login_bg.jpeg") center center;
+
+    background-size: cover;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: linear-gradient(135deg,
+
+            rgba(8, 15, 36, .88),
+
+            rgba(18, 44, 88, .72));
+
+}
+
+/*==============================
+Hero
+===============================*/
+
+.hero-content {
+
+    position: absolute;
+
+    left: 80px;
+
+    top: 120px;
+
+    color: #fff;
+
+    width: 520px;
+
+}
+
+.hero-content h1 {
+
+    font-size: 58px;
+
+    font-weight: 800;
+
+    line-height: 1.1;
+
+}
+
+.hero-content h3 {
+
+    font-weight: 600;
+
+    margin-top: 15px;
+
+}
+
+.hero-content p {
+
+    margin-top: 25px;
+
+    line-height: 1.8;
+
+    color: #dbeafe;
+
+}
+
+/*==============================
+Floating Cards
+===============================*/
+
+.floating-card {
+
+    position: absolute;
+
+    background: rgba(255, 255, 255, .12);
+
+    border: 1px solid rgba(255, 255, 255, .18);
+
+    backdrop-filter: blur(10px);
+
+    color: #fff;
+
+    border-radius: 20px;
+
+    width: 210px;
+
+    padding: 22px;
+
+    animation: float 5s ease-in-out infinite;
+
+    box-shadow: 0 20px 45px rgba(0, 0, 0, .25);
+
+}
+
+.floating-card i {
+
+    font-size: 34px;
+
+    color: #60a5fa;
+
+    margin-bottom: 10px;
+
+}
+
+.floating-card h5 {
+
+    font-size: 17px;
+
+    margin: 0;
+
+    font-weight: 600;
+
+}
+
+.card-one {
+
+    top: 90px;
+
+    right: 70px;
+
+}
+
+.card-two {
+
+    top: 290px;
+
+    right: 220px;
+
+    animation-delay: .8s;
+
+}
+
+.card-three {
+
+    bottom: 120px;
+
+    right: 60px;
+
+    animation-delay: 1.6s;
+
+}
+
+.card-four {
+
+    bottom: 60px;
+
+    left: 90px;
+
+    animation-delay: 2.2s;
+
+}
+
+/*==============================
+Animation
+===============================*/
+
+@keyframes float {
+
+    0% {
+
+        transform: translateY(0);
+
+    }
+
+    50% {
+
+        transform: translateY(-18px);
+
+    }
+
+    100% {
+
+        transform: translateY(0);
+
+    }
+
+}
+
+/*==============================
+Links
+===============================*/
+
+a {
+
+    text-decoration: none;
+
+}
+
+a:hover {
+
+    color: #2563eb;
+
+}
+
+/*==============================
+Alert
+===============================*/
+
+.alert {
+
+    border-radius: 14px;
+
+}
+
+/*==============================
+Responsive
+===============================*/
+
+@media(max-width:992px) {
+
+    body {
+
+        overflow: auto;
+
+    }
+
+    .info-panel {
+
+        display: none;
+
+    }
+
+    .login-panel {
+
+        width: 100%;
+
+        min-height: 100vh;
+
+        padding: 35px;
+
+    }
+
+    .login-box {
+
+        max-width: 100%;
+
+    }
+
+}
+
+@media(max-width:576px) {
+
+    .login-panel {
+
+        padding: 25px;
+
+    }
+
+    .company-logo {
+
+        width: 70px;
+
+    }
+
+    .company-name {
+
+        font-size: 28px;
+
+    }
+
+    .welcome-title {
+
+        font-size: 28px;
+
+    }
+
+    .btn-login {
+
+        padding: 13px;
+
+    }
+
 }

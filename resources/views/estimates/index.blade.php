@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
-  
-
     {{-- Page Header --}}
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4>Estimate List</h4>
@@ -14,7 +10,7 @@
     </div>
 
     {{-- Success Message --}}
-    @if(session('success'))
+    @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
@@ -50,26 +46,22 @@
                                 ₹ {{ number_format($estimate->net_total, 2) }}
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('estimates.show', $estimate->id) }}"
-                                   class="btn btn-sm btn-info">
+                                <a href="{{ route('estimates.show', $estimate->id) }}" class="btn btn-sm btn-info">
                                     View
                                 </a>
 
-                                <a href="{{ route('estimates.edit', $estimate->id) }}"
-                                   class="btn btn-sm btn-warning">
+                                <a href="{{ route('estimates.edit', $estimate->id) }}" class="btn btn-sm btn-warning">
                                     Edit
                                 </a>
 
-                                <a href="{{ route('estimates.pdf', $estimate->id) }}"
-                                   class="btn btn-sm btn-success"
-                                   target="_blank">
+                                <a href="{{ route('estimates.pdf', $estimate->id) }}" class="btn btn-sm btn-success"
+                                    target="_blank">
                                     PDF
                                 </a>
 
-                                <form action="{{ route('estimates.destroy', $estimate->id) }}"
-                                      method="POST"
-                                      style="display:inline-block"
-                                      onsubmit="return confirm('Are you sure you want to delete this estimate?')">
+                                <form action="{{ route('estimates.destroy', $estimate->id) }}" method="POST"
+                                    style="display:inline-block"
+                                    onsubmit="return confirm('Are you sure you want to delete this estimate?')">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-danger">
@@ -89,6 +81,4 @@
             </table>
         </div>
     </div>
-
-</div>
 @endsection

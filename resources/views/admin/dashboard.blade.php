@@ -3,34 +3,99 @@
 @section('title','Dashboard')
 
 @section('content')
-<div class="row md-4 g-3">
-    <div class="col-md-4">
-        <h4>Active users</h4>
-        <ul>
-            @foreach($onl as $online)
-            <li>{{$online->name}}</li>
-            @endforeach
-        </ul>
-    </div>
-</div>
+
 <div class="row mt-4 g-3">
-    <div class="col-md-4">
-        <div class="card p-3">
-            <h4 class="text-uppercase">estimates</h4>
-            {{$escount}}
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card p-3">
-            <h4 class="text-uppercase">Leads</h4>
-            {{$lc}}
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card p-3">
-            <h4 class="text-uppercase">Customers</h4>
-             {{$cuscount}}
-        </div>
+    <div class="dashboard-section">
+         <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex align-items-center">
+                    <div class="section-icon">
+                        <i class="bi bi-graph-up"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h3 class="mb-0">Summary</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    
+                    <div class="modern-card">
+                        <div class="icon-box text-primary">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="text-muted mb-2">
+                                   Estimate
+                                </h6>
+                                <h2 class="fw-bold mb-3">
+                                    {{ $escount }}
+                                </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="modern-card">
+                        <div class="icon-box text-success">
+                                <i class="bi bi-bullseye"></i>
+                            </div>
+                        <div class="flex-grow-1">
+                            <div class="text-muted mb-2">
+                                <h6 class="text-muted mb-2">
+                                   Lead
+                                </h6>
+                                <h2 class="fw-bold mb-3">
+                                    {{ $lc }}
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="modern-card">
+                        <div class="icon-box text-warning">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                             <h6 class="text-muted mb-2">
+                                   Customer
+                                </h6>
+                                <h2 class="fw-bold mb-3">
+                                    {{ $cuscount }}
+                                </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="modern-card">
+                        <div class="icon-box text-warning">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                             <h6 class="text-muted mb-2">
+                                   Today
+                                </h6>
+                                <h2 class="fw-bold mb-3">
+                                    {{ $todayCount }}
+                                </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="modern-card">
+                        <div class="icon-box text-warning">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                             <h6 class="text-muted mb-2">
+                                   Month
+                                </h6>
+                                <h2 class="fw-bold mb-3">
+                                    {{ $monthlyCount }}
+                                </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 <br>
