@@ -324,6 +324,7 @@
                 html += '<option>Box</option>';
 
                 html += '<option>Bundle</option>';
+
                 html += '<option>ltr</option>';
 
                 html += '</select>';

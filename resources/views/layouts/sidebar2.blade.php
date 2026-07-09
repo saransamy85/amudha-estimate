@@ -40,6 +40,10 @@
             <i class="bi bi-tools display-6 text-secondary"></i>
             <span class="menu-text">Machines</span>
         </a>
+        <a href="{{ route('reception.reports') }}">
+            <i class="bi bi-tools display-6 text-secondary"></i>
+            <span class="menu-text">Reports</span>
+        </a>
 
         <a href="{{ route('logout') }}">
             <i class="bi bi-box-arrow-right display-6"></i>

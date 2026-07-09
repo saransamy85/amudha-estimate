@@ -91,36 +91,6 @@
 
                             <hr>
 
-                            <div class="mb-2">
-
-                                <i class="bi bi-box text-primary"></i>
-
-                                <strong>Product :</strong>
-
-                                {{ $site->Product }}
-
-                            </div>
-
-                            <div class="mb-2">
-
-                                <i class="bi bi-grid text-success"></i>
-
-                                <strong>Area :</strong>
-
-                                {{ $site->Area }} Sq.ft
-
-                            </div>
-
-                            <div class="mb-3">
-
-                                <i class="bi bi-currency-rupee text-danger"></i>
-
-                                <strong>Project Value :</strong>
-
-                                ₹ {{ number_format((float) $site->Total_values, 2) }}
-
-                            </div>
-
                             <div class="row text-center">
 
                                 <div class="col-4">

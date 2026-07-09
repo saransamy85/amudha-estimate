@@ -98,45 +98,7 @@
         if (localStorage.getItem('sidebar') === 'collapsed') {
             document.body.classList.add('sidebar-collapsed');
         }
-
-
-        $(document).ready(function() {
-
-            $('#clientTable').DataTable({
-
-                responsive: true,
-
-                pageLength: 10,
-
-                lengthMenu: [
-                    [10, 25, 50, 100, -1],
-                    [10, 25, 50, 100, "All"]
-                ],
-
-                order: [
-                    [1, "desc"]
-                ], // Sort by Date descending
-
-                columnDefs: [{
-                    targets: 6,
-                    className: "text-end"
-                }],
-
-                language: {
-                    search: "Search Customer:",
-                    lengthMenu: "Show _MENU_ entries",
-                    info: "Showing _START_ to _END_ of _TOTAL_ customers",
-                    paginate: {
-                        previous: "Previous",
-                        next: "Next"
-                    }
-                }
-
-            });
-
-        });
     </script>
-    @stack('scripts')
 
 
 

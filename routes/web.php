@@ -6,6 +6,7 @@ use App\Http\Controllers\Purchase\VendorController;
 use App\Http\Controllers\Reception\dashboardcontroller;
 use App\Http\Controllers\Reception\MaterialItemController;
 use App\Http\Controllers\Reception\MaterialReturnController;
+use App\Http\Controllers\Reception\ReceptionReportController;
 use App\Http\Controllers\admincontroller;
 use App\Http\Controllers\customercontroller;
 use App\Http\Controllers\estimatecontroller;
@@ -76,6 +77,7 @@ Route::get('/reception-sites', [dashboardcontroller::class, 'sites'])->name('rec
 Route::get('/reception-materialitems', [MaterialItemController::class, 'index'])->name('receptionmaterialitems');
 Route::post('/addmaterialitems', [MaterialItemController::class, 'store'])->name('addmaterialitems');
 Route::get('/site-timeline/{id}', [dashboardcontroller::class, 'siteTimeline'])->name('sitetimeline');
+Route::get('/reception/reports', [ReceptionReportController::class, 'dashboard'])->name('reception.reports');
 /* return */
 Route::get('/material-return', [MaterialReturnController::class, 'index'])->name('materialreturn');
 
