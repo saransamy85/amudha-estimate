@@ -4,188 +4,178 @@
 
 @section('content')
 
-    <div class="container-fluid">
+<div class="container-fluid">
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-            <h3>
-                Purchase Orders
-            </h3>
+        <h3>
+            Purchase Orders
+        </h3>
 
-            <a href="{{ route('purchase.create') }}" class="btn btn-primary">
+        <a href="{{ route('purchase.create') }}" class="btn btn-primary">
 
-                <i class="bi bi-plus-circle"></i>
+            <i class="bi bi-plus-circle"></i>
 
-                Create Purchase Order
+            Create Purchase Order
 
-            </a>
+        </a>
 
-        </div>
+    </div>
 
-        @if (session('success'))
-            <div class="alert alert-success">
+    @if (session('success'))
+    <div class="alert alert-success">
 
-                {{ session('success') }}
+        {{ session('success') }}
 
-            </div>
-        @endif
+    </div>
+    @endif
 
-        <div class="card shadow">
+    <div class="card shadow">
 
-            <div class="card-body">
+        <div class="card-body">
 
-                <div class="table-responsive">
+            <div class="table-responsive">
 
-                    <table id="purchaseTable" class="table table-bordered table-hover">
+                <table id="purchaseTable" class="table table-bordered table-hover">
 
-                        <thead class="table-dark">
+                    <thead class="table-dark">
 
-                            <tr>
+                        <tr>
 
-                                <th>PO No</th>
+                            <th>PO No</th>
 
-                                <th>Company</th>
+                            <th>Company</th>
 
-                                <th>Vendor</th>
+                            <th>Vendor</th>
 
-                                <th>Site</th>
+                            <th>Site</th>
 
-                                <th>Type</th>
+                            <th>Type</th>
 
-                                <th>Date</th>
+                            <th>Date</th>
 
-                                <th>Total</th>
+                            <th>Total</th>
 
-                                <th>Status</th>
+                            <th>Status</th>
 
-                                <th>Action</th>
+                            <th>Action</th>
 
-                            </tr>
+                        </tr>
 
-                        </thead>
+                    </thead>
 
-                        <tbody>
+                    <tbody>
 
-                            @foreach ($orders as $po)
-                                <tr>
+                        @foreach ($orders as $po)
+                        <tr>
 
-                                    <td>
+                            <td>
 
-                                        {{ $po->po_no }}
+                                {{ $po->po_no }}
 
-                                    </td>
+                            </td>
 
-                                    <td>
+                            <td>
 
-                                        {{ $po->company }}
+                                {{ $po->company }}
 
-                                    </td>
+                            </td>
 
-                                    <td>
+                            <td>
 
-                                        {{ $po->vendor->company_name }}
+                                {{ $po->vendor->company_name }}
 
-                                    </td>
+                            </td>
 
-                                    <td>
+                            <td>
 
-                                        {{ $po->customer->client_name }}
+                                {{ $po->customer->client_name }}
 
-                                    </td>
-                                    <td>
-                                        @php
-                                            $templateLabels = [
-                                                'anchor' => 'Anchor Bolt',
-                                                'steelplate' => 'Steel Plate',
-                                                'fabrication' => 'Fabrication',
-                                                'sandwichpanel' => 'Sandwich Panel',
-                                            ];
-                                        @endphp
-                                        <span class="badge bg-secondary">
-                                            {{ $templateLabels[$po->po_template] ?? ucfirst($po->po_template) }}
-                                        </span>
-                                    </td>
+                            </td>
+                            <td>
+                                @php
+                                $templateLabels = [
+                                'anchor' => 'Anchor Bolt',
+                                'steelplate' => 'Steel Plate',
+                                'fabrication' => 'Fabrication',
+                                'sandwichpanel' => 'Sandwich Panel',
+                                ];
+                                @endphp
+                                <span class="badge bg-secondary">
+                                    {{ $templateLabels[$po->po_template] ?? ucfirst($po->po_template) }}
+                                </span>
+                            </td>
 
-                                    <td>
+                            <td>
 
-                                        {{ date('d-m-Y', strtotime($po->po_date)) }}
+                                {{ date('d-m-Y', strtotime($po->po_date)) }}
 
-                                    </td>
+                            </td>
 
-                                    <td>
+                            <td>
 
-                                        ₹ {{ number_format($po->grand_total, 2) }}
+                                ₹ {{ number_format($po->grand_total, 2) }}
 
-                                    </td>
+                            </td>
 
-                                    <td>
+                            <td>
 
-                                        @if ($po->status == 'Pending')
-                                            <span class="badge bg-warning">
+                                @if ($po->status == 'Pending')
+                                <span class="badge bg-warning">
+                                    Pending
+                                </span>
+                                @elseif($po->status == 'Approved')
+                                <span class="badge bg-success">
+                                    Approved
+                                </span>
+                                @else
+                                <span class="badge bg-danger">
 
-                                                Pending
+                                    Cancelled
 
-                                            </span>
-                                        @elseif($po->status == 'Approved')
-                                            <span class="badge bg-success">
+                                </span>
+                                @endif
 
-                                                Approved
+                            </td>
 
-                                            </span>
-                                        @else
-                                            <span class="badge bg-danger">
+                            <td>
+                                <a href="{{ route('purchase.view', $po->id) }}" class="btn btn-info btn-sm">
 
-                                                Cancelled
+                                    <i class="bi bi-eye"></i>
 
-                                            </span>
-                                        @endif
+                                </a>
 
-                                    </td>
+                                <a href="{{ route('purchase.edit', $po->id) }}" class="btn btn-warning btn-sm">
 
-                                    <td>
+                                    <i class="bi bi-pencil"></i>
 
-                                        <a href="{{ route('purchase.view', $po->id) }}" class="btn btn-info btn-sm">
+                                </a>
+                                <a href="{{ route('purchase.pdf', $po->id) }}" target="_blank" class="btn btn-danger btn-sm">
 
-                                            <i class="bi bi-eye"></i>
+                                    <i class="bi bi-file-earmark-pdf"></i>
 
-                                        </a>
+                                </a>
+                                <form action="{{ route('purchase.delete', $po->id) }}" method="POST" style="display:inline;">
 
-                                        <a href="{{ route('purchase.edit', $po->id) }}" class="btn btn-warning btn-sm">
+                                    @csrf
+                                    @method('DELETE')
 
-                                            <i class="bi bi-pencil"></i>
+                                    <button class="btn btn-dark btn-sm" onclick="return confirm('Delete this Purchase Order?')">
 
-                                        </a>
-                                        <a href="{{ route('purchase.pdf', $po->id) }}" target="_blank"
-                                            class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash"></i>
 
-                                            <i class="bi bi-file-earmark-pdf"></i>
+                                    </button>
 
-                                        </a>
-                                        <form action="{{ route('purchase.delete', $po->id) }}" method="POST"
-                                            style="display:inline;">
+                                </form>
 
-                                            @csrf
-                                            @method('DELETE')
+                            </td>
 
-                                            <button class="btn btn-dark btn-sm"
-                                                onclick="return confirm('Delete this Purchase Order?')">
+                        </tr>
+                        @endforeach
 
-                                                <i class="bi bi-trash"></i>
+                    </tbody>
 
-                                            </button>
-
-                                        </form>
-
-                                    </td>
-
-                                </tr>
-                            @endforeach
-
-                        </tbody>
-
-                    </table>
-
-                </div>
+                </table>
 
             </div>
 
@@ -193,20 +183,23 @@
 
     </div>
 
+</div>
+
 @endsection
 
 @push('scripts')
-    <script>
-        $(document).ready(function() {
+<script>
+    $(document).ready(function() {
 
-            $('#purchaseTable').DataTable({
+        $('#purchaseTable').DataTable({
 
-                responsive: true,
+            responsive: true,
 
-                pageLength: 10
-
-            });
+            pageLength: 10
 
         });
-    </script>
+
+    });
+
+</script>
 @endpush

@@ -58,6 +58,7 @@ Route::get('/admin-lead', [admincontroller::class, 'adminlead'])->name('adminlea
 Route::get('/admin-customer', [admincontroller::class, 'admincus'])->name('admincustomer');
 Route::get('/admin-reports', [reportcontroller::class, 'adminreport'])->name('adminreport');
 Route::put('/customer/status/{id}', [customercontroller::class, 'updateStatus'])->name('customerstatusupdate');
+Route::get('/admin/po-orders', [admincontroller::class, 'po_orders'])->name('admin.po_orders');
 
 /* ---Greeting mail--- */
 Route::post('/greeting', [greetingcontroller::class, 'sendGreeting'])->name('greetings');

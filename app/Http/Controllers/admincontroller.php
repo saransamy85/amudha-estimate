@@ -7,6 +7,7 @@ use App\Models\estimate;
 use App\Models\estimateitems;
 use App\Models\leadfeedback;
 use App\Models\leads;
+use App\Models\PurchaseOrder;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -161,6 +162,10 @@ class admincontroller extends Controller
             $escount = $this->getEstimateCount();
             $cuscount = $this->getCustomerCount();
             $onl = User::where('Status', 'Online')->get();
+            $referenceLeads = leads::with('feedbacks')
+                ->where('source', 'Reference')
+                ->latest()
+                ->get();
 
             $lds = Leads::with('feedbacks');
 
@@ -191,7 +196,8 @@ class admincontroller extends Controller
                 'leadSC',
                 'lsc',
                 'escount',
-                'cuscount'
+                'cuscount',
+                'referenceLeads'
             ));
         }
 
@@ -335,5 +341,16 @@ class admincontroller extends Controller
             'Weekly_Report_' . $from->format('d-m-Y')
             . '_to_' . $to->format('d-m-Y') . '.pdf'
         );
+    }
+
+    public function po_orders()
+    {
+        $orders = PurchaseOrder::with([
+            'vendor',
+            'customer'
+        ])
+            ->latest()
+            ->get();
+        return view('admin/po_orders', compact('orders'));
     }
 }

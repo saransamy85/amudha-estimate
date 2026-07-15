@@ -65,6 +65,10 @@ class salescontroller extends Controller
         $lsc = leads::select('source', \DB::raw('count(*) as total'))
             ->groupBy('source')
             ->pluck('total', 'source');
+        $referenceLeads = leads::with('feedbacks')
+            ->where('source', 'Reference')
+            ->latest()
+            ->paginate(10);
 
         return view('Sales/leaddash', compact(
             'lds',
@@ -72,7 +76,8 @@ class salescontroller extends Controller
             'leadSC',
             'lsc',
             'lc',
-            'cuscount'
+            'cuscount',
+            'referenceLeads'
         ));
     }
 

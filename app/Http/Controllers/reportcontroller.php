@@ -111,6 +111,15 @@ class reportcontroller extends Controller
 
         $confirmedAmount = $confirmedOrders->sum('net_total');
 
+        // Lead Details
+
+        $leadDetails = leads::with(['feedbacks' => function ($query) {
+            $query->latest();
+        }])
+            ->whereBetween('created_at', [$from, $to])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         $pdf = PDF::loadView(
             'admin.monthly-report-pdf',
             compact(
@@ -124,7 +133,8 @@ class reportcontroller extends Controller
                 'statusReport',
                 'confirmedOrders',
                 'confirmedCount',
-                'confirmedAmount'
+                'confirmedAmount',
+                'leadDetails'
             )
         );
 

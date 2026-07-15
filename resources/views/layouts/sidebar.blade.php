@@ -32,6 +32,11 @@
             <span class="badge text-bg-danger">{{ $cuscount }}</span>
         </a>
 
+        <a href="{{ route('admin.po_orders') }}">
+            <i class="bi bi-truck display-6"></i>
+            <span class="menu-text">Purchase Orders</span>
+        </a>
+
         <a href="#">
             <i class="bi bi-sliders  display-6"></i>
             <span class="menu-text">Settings</span>

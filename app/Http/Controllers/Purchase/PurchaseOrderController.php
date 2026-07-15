@@ -154,7 +154,8 @@ class PurchaseOrderController extends Controller
             'anchor',
             'steelplate',
             'fabrication',
-            'sandwichpanel'
+            'sandwichpanel',
+            'gutter'
         ];
 
         if (!in_array($template, $templates)) {
@@ -205,7 +206,7 @@ class PurchaseOrderController extends Controller
         ])->findOrFail($id);
 
         $pdf = Pdf::loadView(
-            'Purchase.purchaseorders.pdf.purchase2',
+            'Purchase.purchaseorders.pdf.purchase',
             compact('po')
         );
 
@@ -232,6 +233,100 @@ class PurchaseOrderController extends Controller
             DB::rollBack();
 
             return back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'company' => 'required',
+            'vendor_id' => 'required',
+            'site_id' => 'required',
+            'po_template' => 'required',
+            'po_date' => 'required',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $po = PurchaseOrder::findOrFail($id);
+
+            // Update Purchase Order Header
+            $po->update([
+                'company' => $request->company,
+                'vendor_id' => $request->vendor_id,
+                'site_id' => $request->site_id,
+                'po_template' => $request->po_template,
+                'po_date' => $request->po_date,
+                'subtotal' => $request->subtotal ?? 0,
+                'gst_percent' => $request->gst_percent ?? 0,
+                'gst_amount' => $request->gst_amount ?? 0,
+                'grand_total' => $request->grand_total ?? 0,
+                'remarks' => $request->remarks,
+            ]);
+
+            // Existing item ids
+            $existingIds = $po->items()->pluck('id')->toArray();
+
+            $submittedIds = [];
+
+            foreach ($request->material as $key => $material) {
+                if (trim($material) == '') {
+                    continue;
+                }
+
+                $itemData = [
+                    'material' => $material,
+                    'size' => $request->size[$key] ?? null,
+                    'width' => $request->width[$key] ?? null,
+                    'color' => $request->color[$key] ?? null,
+                    'dia' => $request->dia[$key] ?? null,
+                    'length' => $request->length[$key] ?? null,
+                    'thickness' => $request->thickness[$key] ?? null,
+                    'nos' => $request->nos[$key] ?? null,
+                    'qty' => $request->qty[$key] ?? null,
+                    'unit' => $request->unit[$key] ?? null,
+                    'approx_weight' => $request->approx_weight[$key] ?? null,
+                    'cutting_charge' => $request->cutting_charge[$key] ?? 0,
+                    'rate' => $request->rate[$key] ?? 0,
+                    'amount' => $request->amount[$key] ?? 0,
+                    'description' => $request->description[$key] ?? null,
+                ];
+
+                // Existing row
+                if (!empty($request->item_id[$key])) {
+                    $item = PurchaseOrderItem::find($request->item_id[$key]);
+
+                    if ($item) {
+                        $item->update($itemData);
+
+                        $submittedIds[] = $item->id;
+                    }
+                }
+                // New row
+                else {
+                    $newItem = $po->items()->create($itemData);
+
+                    $submittedIds[] = $newItem->id;
+                }
+            }
+
+            // Delete removed rows
+            $deleteIds = array_diff($existingIds, $submittedIds);
+
+            PurchaseOrderItem::whereIn('id', $deleteIds)->delete();
+
+            DB::commit();
+
+            return redirect()
+                ->route('purchase.index')
+                ->with('success', 'Purchase Order Updated Successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return back()
+                ->withInput()
+                ->with('error', $e->getMessage());
         }
     }
 }

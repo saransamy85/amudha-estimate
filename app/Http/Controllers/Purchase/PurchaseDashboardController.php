@@ -10,11 +10,22 @@ use Illuminate\Http\Request;
 class PurchaseDashboardController extends Controller
 {
     //
+
+    public function getvendorcount()
+    {
+        return Vendor::count();
+    }
+
+    public function getpocount()
+    {
+        return PurchaseOrder::count();
+    }
+
     public function index()
     {
-        $totalVendor = Vendor::count();
+        $totalVendor = $this->getvendorcount();
 
-        $totalPO = PurchaseOrder::count();
+        $totalPO = $this->getpocount();
 
         $pendingPO = PurchaseOrder::where('status', 'Pending')->count();
 

@@ -4,348 +4,351 @@
 
 @section('content')
 
-    <div class="container-fluid">
+<div class="container-fluid">
 
-        <div class="card shadow">
+    <div class="card shadow">
 
-            <div class="card-header bg-primary text-white">
+        <div class="card-header bg-primary text-white">
 
-                <h4>
+            <h4>
 
-                    <i class="bi bi-cart4"></i>
+                <i class="bi bi-cart4"></i>
 
-                    Create Purchase Order
+                Create Purchase Order
 
-                </h4>
+            </h4>
 
-            </div>
+        </div>
 
-            <div class="card-body">
+        <div class="card-body">
 
-                <form method="POST" action="{{ route('purchase.store') }}">
+            <form method="POST" action="{{ route('purchase.store') }}">
 
-                    @csrf
-                    <div class="row">
+                @csrf
+                <div class="row">
 
-                        <div class="col-md-3">
+                    <div class="col-md-3">
 
-                            <label>
+                        <label>
 
-                                Company
+                            Company
 
-                            </label>
+                        </label>
 
-                            <select class="form-select" name="company" required>
+                        <select class="form-select" name="company" required>
 
-                                <option>
+                            <option>
 
-                                    Amudha Decors
+                                Amudha Decors
 
-                                </option>
+                            </option>
 
-                                <option>
+                            <option>
 
-                                    Arasuvel Roofings
+                                Arasuvel Roofings
 
-                                </option>
+                            </option>
 
-                            </select>
-
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <label>
-
-                                Vendor
-
-                            </label>
-
-                            <select class="form-select" name="vendor_id" required>
-
-                                <option value="">
-
-                                    Select Vendor
-
-                                </option>
-
-                                @foreach ($vendors as $vendor)
-                                    <option value="{{ $vendor->id }}">
-
-                                        {{ $vendor->company_name }}
-
-                                    </option>
-                                @endforeach
-
-                            </select>
-
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <label>
-
-                                Project Site
-
-                            </label>
-
-                            <select class="form-select" name="site_id">
-
-                                <option>
-
-                                    Select Site
-
-                                </option>
-
-                                @foreach ($sites as $site)
-                                    <option value="{{ $site->id }}">
-
-                                        {{ $site->client_name }}
-
-                                    </option>
-                                @endforeach
-
-                            </select>
-
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <label>
-
-                                PO Date
-
-                            </label>
-
-                            <input type="date" class="form-control" name="po_date" value="{{ date('Y-m-d') }}">
-
-                        </div>
+                        </select>
 
                     </div>
-                    <br>
 
-                    <div class="row">
+                    <div class="col-md-3">
 
-                        <div class="col-md-4">
+                        <label>
 
-                            <label>
+                            Vendor
 
-                                Purchase Template
+                        </label>
 
-                            </label>
+                        <select class="form-select" name="vendor_id" required>
 
-                            <select id="template" class="form-select" name="po_template">
+                            <option value="">
 
-                                <option value="anchor">
+                                Select Vendor
 
-                                    Anchor Bolt
+                            </option>
 
-                                </option>
+                            @foreach ($vendors as $vendor)
+                            <option value="{{ $vendor->id }}">
 
-                                <option value="steelplate">
+                                {{ $vendor->company_name }}
 
-                                    Steel Plate
+                            </option>
+                            @endforeach
 
-                                </option>
-
-                                <option value="fabrication">
-
-                                    Fabrication
-
-                                </option>
-
-                                <option value="sandwichpanel">
-
-                                    Sandwich Panel
-
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-                    <hr>
-
-                    <div id="itemTable">
-
-                        @include('Purchase.purchaseorders.templates.anchor')
-
-                    </div>
-                    <hr>
-
-                    <div class="row">
-
-                        <div class="col-md-3">
-
-                            <label>
-
-                                Subtotal
-
-                            </label>
-
-                            <input readonly class="form-control" id="subtotal" name="subtotal">
-
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <label>
-
-                                GST %
-
-                            </label>
-
-                            <input type="number" class="form-control" id="gst_percent" name="gst_percent" value="18">
-
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <label>
-
-                                GST Amount
-
-                            </label>
-
-                            <input readonly class="form-control" id="gst_amount" name="gst_amount">
-
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <label>
-
-                                Grand Total
-
-                            </label>
-
-                            <input readonly class="form-control" id="grand_total" name="grand_total">
-
-                        </div>
+                        </select>
 
                     </div>
 
-                    <br>
+                    <div class="col-md-3">
 
-                    <label>
+                        <label>
 
-                        Remarks
+                            Project Site
 
-                    </label>
+                        </label>
 
-                    <textarea rows="3" class="form-control" name="remarks"></textarea>
+                        <select class="form-select" name="site_id">
 
-                    <br>
+                            <option>
 
-                    <div class="text-end">
+                                Select Site
 
-                        <button class="btn btn-success btn-lg">
+                            </option>
 
-                            <i class="bi bi-check-circle"></i>
+                            @foreach ($sites as $site)
+                            <option value="{{ $site->id }}">
 
-                            Save Purchase Order
+                                {{ $site->client_name }}
 
-                        </button>
+                            </option>
+                            @endforeach
+
+                        </select>
 
                     </div>
-                </form>
 
-            </div>
+                    <div class="col-md-3">
+
+                        <label>
+
+                            PO Date
+
+                        </label>
+
+                        <input type="date" class="form-control" name="po_date" value="{{ date('Y-m-d') }}">
+
+                    </div>
+
+                </div>
+                <br>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+
+                        <label>
+
+                            Purchase Template
+
+                        </label>
+
+                        <select id="template" class="form-select" name="po_template">
+
+                            <option value="anchor">
+
+                                Anchor Bolt
+
+                            </option>
+
+                            <option value="steelplate">
+
+                                Steel Plate
+
+                            </option>
+
+                            <option value="fabrication">
+
+                                Fabrication
+
+                            </option>
+
+                            <option value="sandwichpanel">
+
+                                Sandwich Panel
+
+                            </option>
+
+                            <option value="gutter">UPVC Gutter</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+                <hr>
+
+                <div id="itemTable">
+
+                    @include('Purchase.purchaseorders.templates.anchor')
+
+                </div>
+                <hr>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+
+                        <label>
+
+                            Subtotal
+
+                        </label>
+
+                        <input readonly class="form-control" id="subtotal" name="subtotal">
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>
+
+                            GST %
+
+                        </label>
+
+                        <input type="number" class="form-control" id="gst_percent" name="gst_percent" value="18">
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>
+
+                            GST Amount
+
+                        </label>
+
+                        <input readonly class="form-control" id="gst_amount" name="gst_amount">
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>
+
+                            Grand Total
+
+                        </label>
+
+                        <input readonly class="form-control" id="grand_total" name="grand_total">
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <label>
+
+                    Remarks
+
+                </label>
+
+                <textarea rows="3" class="form-control" name="remarks"></textarea>
+
+                <br>
+
+                <div class="text-end">
+
+                    <button class="btn btn-success btn-lg">
+
+                        <i class="bi bi-check-circle"></i>
+
+                        Save Purchase Order
+
+                    </button>
+
+                </div>
+            </form>
 
         </div>
 
     </div>
 
-    @push('scripts')
-        <script>
-            function bindAnchorEvents() {
+</div>
 
-                // Add Row
-                $(document).off('click', '#addRow').on('click', '#addRow', function() {
+@push('scripts')
+<script>
+    function bindAnchorEvents() {
 
-                    let row = $('#tbody tr:first').clone();
+        // Add Row
+        $(document).off('click', '#addRow').on('click', '#addRow', function() {
 
-                    row.find('input').val('');
+            let row = $('#tbody tr:first').clone();
 
-                    $('#tbody').append(row);
+            row.find('input').val('');
 
-                });
+            $('#tbody').append(row);
 
-                // Remove Row
-                $(document).off('click', '.removeRow').on('click', '.removeRow', function() {
+        });
 
-                    if ($('#tbody tr').length > 1) {
+        // Remove Row
+        $(document).off('click', '.removeRow').on('click', '.removeRow', function() {
 
-                        $(this).closest('tr').remove();
+            if ($('#tbody tr').length > 1) {
 
-                        calculateTotal();
-
-                    }
-
-                });
-
-                // Calculate
-                $(document).off('keyup change', '.qty,.rate,#gst_percent')
-                    .on('keyup change', '.qty,.rate,#gst_percent', function() {
-
-                        calculateTotal();
-
-                    });
+                $(this).closest('tr').remove();
 
                 calculateTotal();
 
             }
 
-            function calculateTotal() {
+        });
 
-                if ($('#tbody').length === 0) {
-                    return; // anchor table not loaded — don't touch totals
-                }
+        // Calculate
+        $(document).off('keyup change', '.qty,.rate,#gst_percent')
+            .on('keyup change', '.qty,.rate,#gst_percent', function() {
 
-                let subtotal = 0;
-
-                $('#tbody tr').each(function() {
-
-                    let qty = parseFloat($(this).find('.qty').val()) || 0;
-                    let rate = parseFloat($(this).find('.rate').val()) || 0;
-                    let amount = qty * rate;
-
-                    $(this).find('.amount').val(amount.toFixed(2));
-                    subtotal += amount;
-
-                });
-
-                $('#subtotal').val(subtotal.toFixed(2));
-
-                let gst = parseFloat($('[name="gst_percent"]').val()) || 0;
-                let gstAmount = subtotal * gst / 100;
-
-                $('#gst_amount').val(gstAmount.toFixed(2));
-                $('#grand_total').val((subtotal + gstAmount).toFixed(2));
-
-            }
-
-            $(document).ready(function() {
-
-                bindAnchorEvents();
-
-                $('#template').change(function() {
-
-                    let template = $(this).val();
-
-                    $('#itemTable').load("{{ url('purchase/template') }}/" + template, function() {
-
-
-                        $.getScript('/js/' + template + '.js');
-                        bindAnchorEvents();
-
-                    });
-
-                });
+                calculateTotal();
 
             });
-        </script>
-    @endpush
+
+        calculateTotal();
+
+    }
+
+    function calculateTotal() {
+
+        if ($('#tbody').length === 0) {
+            return; // anchor table not loaded — don't touch totals
+        }
+
+        let subtotal = 0;
+
+        $('#tbody tr').each(function() {
+
+            let qty = parseFloat($(this).find('.qty').val()) || 0;
+            let rate = parseFloat($(this).find('.rate').val()) || 0;
+            let amount = qty * rate;
+
+            $(this).find('.amount').val(amount.toFixed(2));
+            subtotal += amount;
+
+        });
+
+        $('#subtotal').val(subtotal.toFixed(2));
+
+        let gst = parseFloat($('[name="gst_percent"]').val()) || 0;
+        let gstAmount = subtotal * gst / 100;
+
+        $('#gst_amount').val(gstAmount.toFixed(2));
+        $('#grand_total').val((subtotal + gstAmount).toFixed(2));
+
+    }
+
+    $(document).ready(function() {
+
+        bindAnchorEvents();
+
+        $('#template').change(function() {
+
+            let template = $(this).val();
+
+            $('#itemTable').load("{{ url('purchase/template') }}/" + template, function() {
+
+
+                $.getScript('/js/' + template + '.js');
+                bindAnchorEvents();
+
+            });
+
+        });
+
+    });
+
+</script>
+@endpush
 
 @endsection

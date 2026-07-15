@@ -144,7 +144,8 @@
 
                             <label>Subtotal</label>
 
-                            <input id="subtotal" name="subtotal" class="form-control" value="{{ $po->subtotal }}">
+                            <input type="text" id="subtotal" name="subtotal" class="form-control"
+                                value="{{ $po->subtotal }}" readonly>
 
                         </div>
 
@@ -152,7 +153,8 @@
 
                             <label>GST %</label>
 
-                            <input name="gst_percent" class="form-control" value="{{ $po->gst_percent }}">
+                            <input type="number" id="gst_percent" name="gst_percent" class="form-control"
+                                value="{{ $po->gst_percent }}">
 
                         </div>
 
@@ -160,7 +162,9 @@
 
                             <label>GST Amount</label>
 
-                            <input id="gst_amount" name="gst_amount" class="form-control" value="{{ $po->gst_amount }}">
+                            <input type="text" id="gst_amount" name="gst_amount" class="form-control"
+                                value="{{ $po->gst_amount }}" readonly>
+
 
                         </div>
 
@@ -168,7 +172,8 @@
 
                             <label>Grand Total</label>
 
-                            <input id="grand_total" name="grand_total" class="form-control" value="{{ $po->grand_total }}">
+                            <input type="text" id="grand_total" name="grand_total" class="form-control"
+                                value="{{ $po->grand_total }}" readonly>
 
                         </div>
 

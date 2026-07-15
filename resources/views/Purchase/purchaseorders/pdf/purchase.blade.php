@@ -143,6 +143,7 @@
             font-weight: bold;
 
         }
+
     </style>
 
 </head>
@@ -275,7 +276,7 @@
 
                     SITE AT :
 
-                    {{ $po->customer->Location }}
+                    {{ $po->customer->client_name .'---'.$po->customer->Location }}
 
                 </div>
 
@@ -308,268 +309,319 @@
 
         @if ($po->po_template == 'anchor')
 
-            <tr>
+        <tr>
 
-                <td colspan="2" style="padding:0;">
+            <td colspan="2" style="padding:0;">
 
-                    <table class="border">
+                <table class="border">
 
-                        <thead>
+                    <thead>
 
-                            <tr style="font-weight:bold;text-align:center;">
+                        <tr style="font-weight:bold;text-align:center;">
 
-                                <th width="32%">MATERIAL</th>
+                            <th width="32%">MATERIAL</th>
 
-                                <th width="12%">DIA</th>
+                            <th width="12%">DIA</th>
 
-                                <th width="12%">LENGTH</th>
+                            <th width="12%">LENGTH</th>
 
-                                <th width="15%">NOS</th>
+                            <th width="15%">NOS</th>
 
-                                <th width="15%">RATE/PER NOS</th>
+                            <th width="15%">RATE/PER NOS</th>
 
-                                <th width="14%">AMOUNT</th>
+                            <th width="14%">AMOUNT</th>
 
-                            </tr>
+                        </tr>
 
-                        </thead>
+                    </thead>
 
-                        <tbody>
+                    <tbody>
 
-                            @foreach ($po->items as $item)
-                                <tr style="text-align:center;">
+                        @foreach ($po->items as $item)
+                        <tr style="text-align:center;">
 
-                                    <td>
+                            <td>
 
-                                        {{ $item->material }}
+                                {{ $item->material }}
 
-                                    </td>
+                            </td>
 
-                                    <td>
+                            <td>
 
-                                        {{ $item->dia }}
+                                {{ $item->dia }}
 
-                                    </td>
+                            </td>
 
-                                    <td>
+                            <td>
 
-                                        {{ $item->length }}
+                                {{ $item->length }}
 
-                                    </td>
+                            </td>
 
-                                    <td>
+                            <td>
 
-                                        {{ $item->nos }}
+                                {{ $item->nos }}
 
-                                    </td>
+                            </td>
 
-                                    <td>
+                            <td>
 
-                                        {{ number_format((float) $item->rate, 2) }}
+                                {{ number_format((float) $item->rate, 2) }}
 
-                                    </td>
+                            </td>
 
-                                    <td>
+                            <td>
 
-                                        {{ number_format((float) $item->amount, 2) }}
+                                {{ number_format((float) $item->amount, 2) }}
 
-                                    </td>
+                            </td>
 
-                                </tr>
-                            @endforeach
+                        </tr>
+                        @endforeach
 
-                        </tbody>
+                    </tbody>
 
-                    </table>
+                </table>
 
-                </td>
+            </td>
 
-            </tr>
+        </tr>
 
         @endif
 
 
         @if ($po->po_template == 'steelplate')
 
-            <tr>
+        <tr>
 
-                <td colspan="2" style="padding:0;">
+            <td colspan="2" style="padding:0;">
 
-                    <table class="border">
+                <table class="border">
 
-                        <thead>
+                    <thead>
 
-                            <tr align="center">
+                        <tr align="center">
 
-                                <th>S.NO</th>
+                            <th>S.NO</th>
 
-                                <th>Material</th>
+                            <th>Material</th>
 
-                                <th>Size</th>
+                            <th>Size</th>
 
-                                <th>Thickness</th>
+                            <th>Thickness</th>
 
-                                <th>Approx Weight</th>
+                            <th>Approx Weight</th>
 
-                                <th>Rate/KG</th>
+                            <th>Rate/KG</th>
 
-                                <th>Amount</th>
+                            <th>Amount</th>
 
-                            </tr>
+                        </tr>
 
-                        </thead>
+                    </thead>
 
-                        <tbody>
+                    <tbody>
 
-                            @foreach ($po->items as $item)
-                                <tr align="center">
+                        @foreach ($po->items as $item)
+                        <tr align="center">
 
-                                    <td>{{ $loop->iteration }}</td>
+                            <td>{{ $loop->iteration }}</td>
 
-                                    <td>{{ $item->material }}</td>
+                            <td>{{ $item->material }}</td>
 
-                                    <td>{{ $item->size }}</td>
+                            <td>{{ $item->size }}</td>
 
-                                    <td>{{ $item->thickness }}</td>
+                            <td>{{ $item->thickness }}</td>
 
-                                    <td>{{ $item->approx_weight }}</td>
+                            <td>{{ $item->approx_weight }}</td>
 
-                                    <td>{{ number_format((float) $item->rate, 2) }}</td>
+                            <td>{{ number_format((float) $item->rate, 2) }}</td>
 
-                                    <td>{{ number_format((float) $item->amount, 2) }}</td>
+                            <td>{{ number_format((float) $item->amount, 2) }}</td>
 
-                                </tr>
-                            @endforeach
+                        </tr>
+                        @endforeach
 
-                        </tbody>
+                    </tbody>
 
-                    </table>
+                </table>
 
-                </td>
+            </td>
 
-            </tr>
+        </tr>
 
         @endif
 
 
         @if ($po->po_template == 'fabrication')
 
-            <tr>
+        <tr>
 
-                <td colspan="2" style="padding:0;">
+            <td colspan="2" style="padding:0;">
 
-                    <table class="border">
+                <table class="border">
 
-                        <thead>
+                    <thead>
 
-                            <tr align="center">
+                        <tr align="center">
 
-                                <th>Material</th>
+                            <th>Material</th>
 
-                                <th>Size</th>
+                            <th>Size</th>
 
-                                <th>Thickness</th>
+                            <th>Thickness</th>
 
-                                <th>Qty</th>
+                            <th>Qty</th>
 
-                                <th>Rate</th>
+                            <th>Rate</th>
 
-                                <th>Amount</th>
+                            <th>Amount</th>
 
-                            </tr>
+                        </tr>
 
-                        </thead>
+                    </thead>
 
-                        <tbody>
+                    <tbody>
 
-                            @foreach ($po->items as $item)
-                                <tr align="center">
+                        @foreach ($po->items as $item)
+                        <tr align="center">
 
-                                    <td>{{ $item->material }}</td>
+                            <td>{{ $item->material }}</td>
 
-                                    <td>{{ $item->size }}</td>
+                            <td>{{ $item->size }}</td>
 
-                                    <td>{{ $item->thickness }}</td>
+                            <td>{{ $item->thickness }}</td>
 
-                                    <td>{{ $item->qty }}</td>
+                            <td>{{ $item->qty }}</td>
 
-                                    <td>{{ number_format((float) $item->rate, 2) }}</td>
+                            <td>{{ number_format((float) $item->rate, 2) }}</td>
 
-                                    <td>{{ number_format((float) $item->amount, 2) }}</td>
+                            <td>{{ number_format((float) $item->amount, 2) }}</td>
 
-                                </tr>
-                            @endforeach
+                        </tr>
+                        @endforeach
 
-                        </tbody>
+                    </tbody>
 
-                    </table>
+                </table>
 
-                </td>
+            </td>
 
-            </tr>
+        </tr>
 
         @endif
 
 
         @if ($po->po_template == 'sandwichpanel')
 
-            <tr>
+        <tr>
 
-                <td colspan="2" style="padding:0;">
+            <td colspan="2" style="padding:0;">
 
-                    <table class="border">
+                <table class="border">
 
-                        <thead>
+                    <thead>
 
-                            <tr align="center">
+                        <tr align="center">
 
-                                <th>Material</th>
+                            <th>Material</th>
 
-                                <th>Width</th>
+                            <th>Width</th>
 
-                                <th>Thickness</th>
+                            <th>Thickness</th>
 
-                                <th>Colour</th>
+                            <th>Colour</th>
 
-                                <th>Qty</th>
+                            <th>Qty</th>
 
-                                <th>Rate</th>
+                            <th>Rate</th>
 
-                                <th>Amount</th>
+                            <th>Amount</th>
 
-                            </tr>
+                        </tr>
 
-                        </thead>
+                    </thead>
 
-                        <tbody>
+                    <tbody>
 
-                            @foreach ($po->items as $item)
-                                <tr align="center">
+                        @foreach ($po->items as $item)
+                        <tr align="center">
 
-                                    <td>{{ $item->material }}</td>
+                            <td>{{ $item->material }}</td>
 
-                                    <td>{{ $item->width }}</td>
+                            <td>{{ $item->width }}</td>
 
-                                    <td>{{ $item->thickness }}</td>
+                            <td>{{ $item->thickness }}</td>
 
-                                    <td>{{ $item->color }}</td>
+                            <td>{{ $item->color }}</td>
 
-                                    <td>{{ $item->qty }}</td>
+                            <td>{{ $item->qty }}</td>
 
-                                    <td>{{ number_format((float) $item->rate, 2) }}</td>
+                            <td>{{ number_format((float) $item->rate, 2) }}</td>
 
-                                    <td>{{ number_format((float) $item->amount, 2) }}</td>
+                            <td>{{ number_format((float) $item->amount, 2) }}</td>
 
-                                </tr>
-                            @endforeach
+                        </tr>
+                        @endforeach
 
-                        </tbody>
+                    </tbody>
 
-                    </table>
+                </table>
 
-                </td>
+            </td>
 
-            </tr>
+        </tr>
+
+        @endif
+
+        @if ($po->po_template == 'gutter')
+
+        <tr>
+
+            <td colspan="2" style="padding:0;">
+
+                <table class="border">
+
+                    <thead>
+
+                        <tr align="center">
+
+                            <th>Particular</th>
+
+                            <th>nos</th>
+
+                            <th>Rate/no</th>
+
+                            <th>Amount</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach ($po->items as $item)
+                        <tr align="center">
+
+                            <td>{{ $item->material }}</td>
+
+                            <td>{{ $item->nos }}</td>
+
+                            <td>{{ $item->rate }}</td>
+
+
+                            <td>{{ number_format((float) $item->amount, 2) }}</td>
+
+                        </tr>
+                        @endforeach
+
+                    </tbody>
+
+                </table>
+
+            </td>
+
+        </tr>
 
         @endif
 

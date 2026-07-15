@@ -340,6 +340,63 @@
         </tbody>
 
     </table>
+    <h3 style="margin-top:25px;">Lead Details Report</h3>
+
+    <table width="100%" border="1" cellspacing="0" cellpadding="5">
+
+        <thead>
+
+            <tr style="background:#eeeeee;">
+
+                <th>S.No</th>
+
+                <th>Date</th>
+
+                <th>Customer</th>
+
+                <th>Mobile</th>
+
+                <th>Product</th>
+
+                <th>Source</th>
+
+                <th>Status</th>
+
+                <th>Last Feedback</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach ($leadDetails as $lead)
+                <tr>
+
+                    <td>{{ $loop->iteration }}</td>
+
+                    <td>{{ $lead->created_at->format('d-m-Y') }}</td>
+
+                    <td>{{ $lead->Name }}</td>
+
+                    <td>{{ $lead->Mobile }}</td>
+
+                    <td>{{ $lead->Product }}</td>
+
+                    <td>{{ $lead->source }}</td>
+
+                    <td>{{ $lead->Status }}</td>
+
+                    <td>
+                        {{ optional($lead->feedbacks->first())->feedback ?? '-' }}
+                    </td>
+
+                </tr>
+            @endforeach
+
+        </tbody>
+
+    </table>
 
     <div class="footer">
 
