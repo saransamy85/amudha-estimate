@@ -59,15 +59,15 @@ class PurchaseOrderController extends Controller
         $financialYear = $year . '-' . $nextYear;
 
         $last = PurchaseOrder::where('company', $company)
-            ->latest('id')
+            ->orderBy('id', 'desc')
             ->first();
 
         if ($last) {
-            $number = (int) substr($last->po_no, -4);
+            preg_match('/(\d+)$/', $last->po_no, $matches);
 
-            $number++;
+            $number = isset($matches[1]) ? (int) $matches[1] + 1 : 150;
         } else {
-            $number = 1;
+            $number = 150;
         }
 
         return $prefix . '/PO/' . $financialYear . '/' . str_pad($number, 4, '0', STR_PAD_LEFT);
@@ -84,6 +84,9 @@ class PurchaseOrderController extends Controller
             'site_id' => 'required',
             'po_template' => 'required',
             'po_date' => 'required',
+            'po_no' => $request->company == 'Arasuvel Roofings'
+                ? 'required|unique:purchase_orders,po_no'
+                : 'nullable',
         ]);
 
         if (!$request->has('material')) {
@@ -96,7 +99,9 @@ class PurchaseOrderController extends Controller
 
         try {
             $po = PurchaseOrder::create([
-                'po_no' => $this->generatePoNo($request->company),
+                'po_no' => $request->company == 'Arasuvel Roofings'
+                    ? $request->po_no
+                    : $this->generatePoNo($request->company),
                 'company' => $request->company,
                 'vendor_id' => $request->vendor_id,
                 'site_id' => $request->site_id,
@@ -155,7 +160,9 @@ class PurchaseOrderController extends Controller
             'steelplate',
             'fabrication',
             'sandwichpanel',
-            'gutter'
+            'gutter',
+            'polycarbonate',
+            'metalsheet'
         ];
 
         if (!in_array($template, $templates)) {
@@ -206,7 +213,7 @@ class PurchaseOrderController extends Controller
         ])->findOrFail($id);
 
         $pdf = Pdf::loadView(
-            'Purchase.purchaseorders.pdf.purchase',
+            'Purchase.purchaseorders.pdf.purchaseupdate',
             compact('po')
         );
 

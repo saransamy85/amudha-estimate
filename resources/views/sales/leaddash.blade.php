@@ -253,7 +253,7 @@
                                                 <td>{{ $leds->Status }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-center gap-1">
-                                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-lead-id="{{ $leds->id }}">
+                                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-lead-id="{{ $leds->id }}" data-status="{{ $leds->Status }}">
                                                             Feedback
                                                         </button>
                                                         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#timelineModal{{ $leds->id }}" data-lead-id="{{ $leds->id }}">
@@ -281,20 +281,15 @@
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label>Status</label>
-                                                                            <select class="form-select" aria-label="Default select example" name="status">
-                                                                                <option value="Details shared">
-                                                                                    Details shared</option>
-                                                                                <option value="Follow up">Follow up
-                                                                                </option>
-                                                                                <option value="Confirmed">Confirmed
-                                                                                </option>
-                                                                                <option value="Quote Shared">Quote
-                                                                                    Shared</option>
+                                                                            <select class="form-select" name="status" id="status" required>
+                                                                                <option value="" selected disabled>-- Select Status --</option>
+                                                                                <option value="Details shared">Details shared</option>
+                                                                                <option value="Follow up">Follow up</option>
+                                                                                <option value="Confirmed">Confirmed</option>
+                                                                                <option value="Quote Shared">Quote Shared</option>
                                                                                 <option value="RNR">RNR</option>
-                                                                                <option value="Cancelled">Cancelled
-                                                                                </option>
-                                                                                <option value="Site Visit">Schedule
-                                                                                    For Site Visit</option>
+                                                                                <option value="Cancelled">Cancelled</option>
+                                                                                <option value="Site Visit">Schedule For Site Visit</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>

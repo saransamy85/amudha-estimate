@@ -624,6 +624,147 @@
         </tr>
 
         @endif
+        @if ($po->po_template == 'polycarbonate')
+
+        <tr>
+
+            <td colspan="2" style="padding:0;">
+
+                <table class="border">
+
+                    <thead>
+
+                        <tr align="center">
+
+                            <th>S.No</th>
+
+                            <th>Particular</th>
+
+                            <th>Length (m)</th>
+
+                            <th>Width (m)</th>
+
+                            <th>Nos</th>
+
+                            <th>Area (Sqm)</th>
+
+                            <th>Rate</th>
+
+                            <th>Amount</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach ($po->items as $key => $item)
+
+                        <tr align="center">
+
+                            <td>{{ $key + 1 }}</td>
+
+                            <td align="left">{{ $item->material }}</td>
+
+                            <td>{{ number_format((float)$item->length,3) }}</td>
+
+                            <td>{{ number_format((float)$item->width,3) }}</td>
+
+                            <td>{{ $item->nos }}</td>
+
+                            <td>{{ number_format((float)$item->area,3) }}</td>
+
+                            <td>{{ number_format((float)$item->rate,2) }}</td>
+
+                            <td>{{ number_format((float)$item->amount,2) }}</td>
+
+                        </tr>
+
+                        @endforeach
+
+                    </tbody>
+
+                </table>
+
+            </td>
+
+        </tr>
+
+        @endif
+        @if ($po->po_template == 'metalsheet')
+
+        <tr>
+
+            <td colspan="2" style="padding:0;">
+
+                <table class="border" width="100%">
+
+                    <thead>
+
+                        <tr align="center">
+
+                            <th width="5%">S.No</th>
+                            <th width="28%">Material</th>
+                            <th width="8%">Width(M)</th>
+                            <th width="8%">Length(M)</th>
+                            <th width="8%">Nos</th>
+                            <th width="10%">SQ.M</th>
+                            <th width="13%">Rate(SQ.M)</th>
+                            <th width="15%">Amount</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach ($po->items as $key => $item)
+
+                        <tr align="center">
+
+                            <td>{{ $key + 1 }}</td>
+
+                            <td align="left">
+                                {{ $item->material }}
+                            </td>
+
+                            <td>
+                                {{ number_format((float)$item->width, 2) }}
+                            </td>
+
+                            <td>
+                                {{ number_format((float)$item->length, 2) }}
+                            </td>
+
+                            <td>
+                                {{ $item->nos }}
+                            </td>
+
+                            <td>
+                                {{ number_format((float)$item->area, 2) }}
+                            </td>
+
+                            <td>
+                                {{ number_format((float)$item->rate, 2) }}
+                            </td>
+
+                            <td>
+                                {{ number_format((float)$item->amount, 2) }}
+                            </td>
+
+                        </tr>
+
+                        @endforeach
+
+                    </tbody>
+
+                </table>
+
+            </td>
+
+        </tr>
+
+        @endif
 
 
         <!-- TOTALS -->

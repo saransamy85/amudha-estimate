@@ -20,9 +20,22 @@ class reportcontroller extends Controller
     {
         if (session()->has('username')) {
             $escount = estimate::count();
+
             $lc = leads::count();
-            $leadSC = leads::select('Status', \DB::raw('count(*) as total'))->groupBy('Status')->pluck('total', 'Status');
-            $lsc = leads::select('source', \DB::raw('count(*) as total'))->groupBy('source')->pluck('total', 'source');
+
+            $leadSC = leads::select(
+                'Status',
+                DB::raw('COUNT(*) as total')
+            )
+                ->groupBy('Status')
+                ->pluck('total', 'Status');
+
+            $lsc = leads::select(
+                'source',
+                DB::raw('COUNT(*) as total')
+            )
+                ->groupBy('source')
+                ->pluck('total', 'source');
 
             $today = Carbon::today();
 
@@ -43,9 +56,30 @@ class reportcontroller extends Controller
                 ->orderBy(DB::raw('MONTH(created_at)'))
                 ->get();
 
-            return view('admin/reports', compact('escount', 'lc', 'leadSC', 'lsc', 'monthlyLeads', 'todayLeads', 'todayEstimates', 'todayFeedbacks', 'todayCustomers'));
+            $monthLabels = $monthlyLeads->map(function ($row) {
+                return Carbon::create()->month($row->month)->format('M');
+            });
+
+            $monthValues = $monthlyLeads->pluck('total');
+
+            return view('admin.reports', compact(
+                'escount',
+                'lc',
+                'leadSC',
+                'lsc',
+                'monthlyLeads',
+                'todayLeads',
+                'todayEstimates',
+                'todayFeedbacks',
+                'todayCustomers',
+                'monthLabels',
+                'monthValues'
+            ));
         }
-        return redirect()->route('login')->with('error', 'You must Login');
+
+        return redirect()
+            ->route('login')
+            ->with('error', 'You must Login');
     }
 
     public function customReportForm()

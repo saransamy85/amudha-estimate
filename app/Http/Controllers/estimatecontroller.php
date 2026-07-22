@@ -88,6 +88,7 @@ class estimatecontroller extends Controller
                 $estimate->items()->create([
                     'location' => $request->location[$i],
                     'area' => $area,
+                    'unit' => $request->unit[$i],
                     'rate' => $rate,
                     'value' => $value,
                 ]);

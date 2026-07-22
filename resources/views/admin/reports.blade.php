@@ -4,23 +4,23 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="p-3">
-        <a href="{{ route('dailyreport') }}" class="btn btn-danger">
-            <i class="bi bi-file-earmark-pdf"></i> Download Daily Report
-        </a>
+    <div class="row mb-4">
+        <div class="col-lg-4">
+            <a href="{{ route('dailyreport') }}" class="btn btn-danger">
+                <i class="bi bi-file-earmark-pdf"></i> Download Daily Report
+            </a>
+        </div>
+        <div class="col-lg-4">
+            <a href="{{ route('weeklyreport') }}" class="btn btn-danger">
+                <i class="bi bi-file-earmark-pdf"></i> Download Weekly Report
+            </a>
+        </div>
+        <div class="col-lg-4">
+            <a href="{{ route('monthlyreport') }}" class="btn btn-danger">
+                <i class="bi bi-file-earmark-pdf"></i> Monthly Report
+            </a>
+        </div>
     </div>
-    <div class="p-3">
-        <a href="{{ route('weeklyreport') }}" class="btn btn-danger">
-            <i class="bi bi-file-earmark-pdf"></i> Download Weekly Report
-        </a>
-    </div>
-    <div class="p-3">
-        <a href="{{ route('monthlyreport') }}" class="btn btn-danger">
-            <i class="bi bi-file-earmark-pdf"></i> Monthly Report
-        </a>
-    </div>
-
-
     <br>
     <div class="row mb-4">
 
@@ -83,17 +83,18 @@
     </table>
 
     <div class="row mt-4 g-3">
-        <div class="col-md-3 mb-3">
-            <div class="card shadow">
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
                 <div class="card-header bg-primary text-white">
-                    Lead Status Chart
+                    Monthly Leads Trend
                 </div>
                 <div class="card-body">
-                    <canvas id="leadChart" height="300"></canvas>
+                    <canvas id="monthlyLeadChart" height="110"></canvas>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 mb-3">
+        <div class="col-lg-6">
+
             <div class="card shadow">
                 <div class="card-header bg-primary text-white">
                     Lead Source Chart
@@ -102,143 +103,61 @@
                     <canvas id="Source" height="120"></canvas>
                 </div>
             </div>
+
         </div>
     </div>
 
-
-
-
-
-
-
     <script>
-        let delayed = false;
+        const ctx = document.getElementById('monthlyLeadChart');
 
-        const labels = {
-            !!json_encode($leadSC - > keys()) !!
-        };
-        const values = {
-            !!json_encode($leadSC - > values()) !!
-        };
+        new Chart(ctx, {
 
-        new Chart(document.getElementById('leadChart'), {
-
-            type: 'bar',
+            type: 'line',
 
             data: {
 
-                labels: labels,
+                labels: @json($monthLabels),
 
                 datasets: [{
 
-                    label: 'Lead Count',
+                    label: 'Monthly Leads',
 
-                    data: values,
+                    data: @json($monthValues),
 
-                    backgroundColor: [
-                        '#0d6efd'
-                        , '#ffc107'
-                        , '#198754'
-                        , '#dc3545'
-                        , '#6f42c1'
-                        , '#20c997'
-                        , '#fd7e14'
-                        , '#0dcaf0'
-                    ],
+                    borderColor: '#0d6efd',
 
-                    borderRadius: 12,
+                    backgroundColor: 'rgba(13,110,253,.15)',
 
-                    borderSkipped: false,
+                    fill: true,
 
-                    maxBarThickness: 55
+                    tension: .35,
+
+                    pointRadius: 6,
+
+                    pointHoverRadius: 8,
+
+                    pointBackgroundColor: '#fff',
+
+                    pointBorderColor: '#0d6efd',
+
+                    pointBorderWidth: 3,
+
+                    pointHoverBackgroundColor: '#0d6efd',
+
+                    pointHoverBorderColor: '#fff'
 
                 }]
-
             },
-
-            plugins: [ChartDataLabels],
 
             options: {
 
                 responsive: true,
-
-                maintainAspectRatio: false,
-
-                animation: {
-
-                    onComplete: () => {
-
-                        delayed = true;
-
-                    },
-
-                    delay: (context) => {
-
-                        let delay = 0;
-
-                        if (
-                            context.type === 'data' &&
-                            context.mode === 'default' &&
-                            !delayed
-                        ) {
-
-                            delay = context.dataIndex * 300;
-
-                        }
-
-                        return delay;
-
-                    },
-
-                    duration: 1800,
-
-                    easing: 'easeOutBounce'
-
-                },
 
                 plugins: {
 
                     legend: {
 
                         display: false
-
-                    },
-
-                    tooltip: {
-
-                        callbacks: {
-
-                            label: function(context) {
-
-                                return ' Leads : ' + context.raw;
-
-                            }
-
-                        }
-
-                    },
-
-                    datalabels: {
-
-                        anchor: 'end',
-
-                        align: 'top',
-
-                        color: '#000',
-
-                        font: {
-
-                            size: 13,
-
-                            weight: 'bold'
-
-                        },
-
-                        formatter: function(value) {
-
-                            return value;
-
-                        }
 
                     }
 
@@ -252,57 +171,7 @@
 
                         ticks: {
 
-                            precision: 0,
-
-                            stepSize: 1
-
-                        },
-
-                        title: {
-
-                            display: true,
-
-                            text: 'Number of Leads',
-
-                            font: {
-
-                                size: 14,
-
-                                weight: 'bold'
-
-                            }
-
-                        },
-
-                        grid: {
-
-                            color: '#e9ecef'
-
-                        }
-
-                    },
-
-                    x: {
-
-                        title: {
-
-                            display: true,
-
-                            text: 'Lead Status',
-
-                            font: {
-
-                                size: 14,
-
-                                weight: 'bold'
-
-                            }
-
-                        },
-
-                        grid: {
-
-                            display: false
+                            precision: 0
 
                         }
 
@@ -315,7 +184,6 @@
         });
 
     </script>
-
     <script>
         const labels1 = {
             !!json_encode($lsc - > keys()) !!
@@ -324,53 +192,102 @@
             !!json_encode($lsc - > values()) !!
         };
 
-        const total1 = values.reduce((a, b) => a + b, 0);
-
         new Chart(document.getElementById('Source'), {
-            type: 'doughnut'
-            , data: {
+
+            type: 'bar',
+
+            data: {
                 labels: labels1
                 , datasets: [{
-                    data: values1
-                    , backgroundColor: [
+                    label: 'Lead Sources'
+                    , data: values1,
+
+                    backgroundColor: [
                         '#0d6efd'
-                        , '#ffc107'
                         , '#198754'
+                        , '#ffc107'
                         , '#dc3545'
-                    ]
-                    , hoverOffset: 15 // 🔥 slice zoom on hover
+                        , '#6f42c1'
+                        , '#fd7e14'
+                        , '#20c997'
+                        , '#0dcaf0'
+                    ],
+
+                    borderColor: [
+                        '#0d6efd'
+                        , '#198754'
+                        , '#ffc107'
+                        , '#dc3545'
+                        , '#6f42c1'
+                        , '#fd7e14'
+                        , '#20c997'
+                        , '#0dcaf0'
+                    ],
+
+                    borderWidth: 1,
+
+                    borderRadius: 8,
+
+                    barThickness: 40
                 }]
-            }
-            , plugins: [ChartDataLabels]
-            , options: {
-                responsive: true
-                , animation: {
-                    animateRotate: true
-                    , animateScale: true
-                    , duration: 1800
-                    , easing: 'easeOutBounce'
-                }
-                , plugins: {
-                    datalabels: {
-                        color: '#fff'
-                        , font: {
-                            weight: 'bold'
-                            , size: 13
-                        }
-                        , formatter: (value1) => {
-                            let percent = ((value1 / total1) * 100).toFixed(1);
-                            return `${value1} (${percent}%)`;
-                        }
+            },
+
+            options: {
+
+                responsive: true,
+
+                plugins: {
+
+                    legend: {
+                        display: false
+                    },
+
+                    tooltip: {
+                        enabled: true
                     }
-                    , legend: {
-                        position: 'bottom'
+
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+                            precision: 0
+                        },
+
+                        title: {
+                            display: true
+                            , text: 'Number of Leads'
+                        }
+
+                    },
+
+                    x: {
+
+                        title: {
+                            display: true
+                            , text: 'Lead Sources'
+                        }
+
                     }
+
+                },
+
+                animation: {
+
+                    duration: 1500,
+
+                    easing: 'easeOutBounce'
+
                 }
+
             }
+
         });
 
     </script>
-
-
 
     @endsection

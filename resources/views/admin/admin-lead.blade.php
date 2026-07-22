@@ -196,14 +196,15 @@
                                                         </div>
                                                         <div class="mb-3">
                                                             <label>Status</label>
-                                                            <select class="form-select" aria-label="Default select example" name="status">
-                                                                <option value="Details shared">Details
-                                                                    shared</option>
+                                                            <select class="form-select" name="status" id="status" required>
+                                                                <option value="" selected disabled>-- Select Status --</option>
+                                                                <option value="Details shared">Details shared</option>
                                                                 <option value="Follow up">Follow up</option>
                                                                 <option value="Confirmed">Confirmed</option>
                                                                 <option value="Quote Shared">Quote Shared</option>
                                                                 <option value="RNR">RNR</option>
                                                                 <option value="Cancelled">Cancelled</option>
+                                                                <option value="Site Visit">Schedule For Site Visit</option>
                                                             </select>
                                                         </div>
                                                     </div>

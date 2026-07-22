@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class estimateitems extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'estimate_id',
         'location',
         'area',
+        'unit',
         'rate',
         'value',
     ];
-
 }

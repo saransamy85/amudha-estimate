@@ -35,20 +35,10 @@
 
                         </label>
 
-                        <select class="form-select" name="company" required>
-
-                            <option>
-
-                                Amudha Decors
-
-                            </option>
-
-                            <option>
-
-                                Arasuvel Roofings
-
-                            </option>
-
+                        <select name="company" id="company" class="form-select">
+                            <option value="">Select Company</option>
+                            <option value="Amudha Decors">Amudha Decors</option>
+                            <option value="Arasuvel Roofings">Arasuvel Roofings</option>
                         </select>
 
                     </div>
@@ -81,6 +71,7 @@
 
                     </div>
 
+
                     <div class="col-md-3">
 
                         <label>
@@ -112,13 +103,16 @@
                     <div class="col-md-3">
 
                         <label>
-
                             PO Date
-
                         </label>
 
                         <input type="date" class="form-control" name="po_date" value="{{ date('Y-m-d') }}">
 
+                    </div>
+
+                    <div id="po_no_div" class="col-md-3" style="display:none;">
+                        <label>PO Number</label>
+                        <input type="text" name="po_no" class="form-control">
                     </div>
 
                 </div>
@@ -161,6 +155,9 @@
                             </option>
 
                             <option value="gutter">UPVC Gutter</option>
+
+                            <option value="polycarbonate">Polycarbonate Sheet</option>
+                            <option value="metalsheet">Metal Sheet</option>
 
                         </select>
 
@@ -348,7 +345,30 @@
 
     });
 
+
+    $(document).ready(function() {
+
+        $('#company').on('change', function() {
+
+            if ($(this).val() == 'Arasuvel Roofings') {
+
+                $('#po_no_div').removeClass('d-none').show();
+
+            } else {
+
+                $('#po_no_div').hide();
+
+            }
+
+        });
+
+        $('#company').trigger('change');
+
+    });
+
 </script>
 @endpush
+<script>
 
+</script>
 @endsection

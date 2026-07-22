@@ -1,8 +1,7 @@
 <html>
 
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>
         Estimate create
     </title>
@@ -13,31 +12,30 @@
     <div class="p-3">
         <div class="container">
             @if (session('error'))
-                <div class="alert alert-danger alert-dismissible fade show">
+            <div class="alert alert-danger alert-dismissible fade show">
 
-                    {{ session('error') }}
+                {{ session('error') }}
 
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 
-                </div>
+            </div>
             @endif
             <form action="{{ route('estimates.store') }}" method="POST">
                 @csrf
 
                 <h4>Customer Details</h4>
-
-                <input type="checkbox" name="re_estimate" value="1"><label for="Re-estimate">Re-estimate</label>
-                <br>
+                <div class="mb-3">
+                    <input type="checkbox" name="re_estimate" value="1" style="height:1.2em;width:1.2em;">&nbsp;&nbsp;<label for="Re-estimate" style="font-size:1.3em;">Re-estimate</label>
+                    <br>
+                </div>
 
                 <input type="text" name="customer_name" class="form-control" placeholder="Customer Name" required>
 
-                <input type="text" name="address_line1" class="form-control mt-2" placeholder="Address Line 1"
-                    required>
+                <input type="text" name="address_line1" class="form-control mt-2" placeholder="Address Line 1" required>
 
                 <input type="text" name="address_line2" class="form-control mt-2" placeholder="Address Line 2">
 
-                <input type="text" name="mobile" class="form-control mt-2" placeholder="Mobile No" required
-                    onpaste="return false;" id="mobile">
+                <input type="text" name="mobile" class="form-control mt-2" placeholder="Mobile No" required onpaste="return false;" id="mobile">
 
                 <hr>
 
@@ -64,6 +62,21 @@
                         <tr>
                             <td><input name="location[]" class="form-control" required></td>
                             <td><input name="area[]" class="form-control" required></td>
+                            <td>
+                                <select name="unit[]" class="form-select" required>
+                                    <option value="">Select</option>
+                                    <option value="KG">KG</option>
+                                    <option value="TON">TON</option>
+                                    <option value="SQ FT">SQ FT</option>
+                                    <option value="SQ M">SQ M</option>
+                                    <option value="R.FT">R.FT</option>
+                                    <option value="NOS">NOS</option>
+                                    <option value="JOB">JOB</option>
+                                    <option value="SET">SET</option>
+                                    <option value="LOT">LOT</option>
+                                    <option value="LS">LS</option>
+                                </select>
+                            </td>
                             <td><input name="rate[]" class="form-control rate" required></td>
                             <td><input name="value[]" class="form-control value" readonly></td>
                         </tr>
@@ -85,8 +98,7 @@
 
                     <div class="col-md-3">
                         <label>Transportation Charges</label>
-                        <input type="number" name="transport_charges" id="transport_charges" value="0"
-                            class="form-control">
+                        <input type="number" name="transport_charges" id="transport_charges" value="0" class="form-control">
                     </div>
 
                 </div>
@@ -170,14 +182,29 @@
         <tr>
             <td><input name="location[]" class="form-control"></td>
             <td><input name="area[]" class="form-control area"></td>
+            <td>
+        <select name="unit[]" class="form-select" required>
+            <option value="">Select</option>
+            <option value="KG">KG</option>
+            <option value="TON">TON</option>
+            <option value="SQ FT">SQ FT</option>
+            <option value="SQ M">SQ M</option>
+            <option value="R.FT">R.FT</option>
+            <option value="NOS">NOS</option>
+            <option value="JOB">JOB</option>
+            <option value="SET">SET</option>
+            <option value="LOT">LOT</option>
+            <option value="LS">LS</option>
+        </select>
+    </td>
             <td><input name="rate[]" class="form-control rate"></td>
             <td><input name="value[]" class="form-control value" readonly></td>
         </tr>
     `);
                 }
+
             </script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
             </script>
         </div>
     </div>
